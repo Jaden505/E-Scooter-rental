@@ -1,15 +1,19 @@
 <template>
   <HeaderComp></HeaderComp>
+  <NavBar></NavBar>
   <WelcomePage></WelcomePage>
+
 </template>
 
 <script>
 import WelcomePage from './components/Welcome.vue'
 import HeaderComp from './components/Header.vue'
+import NavBar from "@/components/NavBar";
 
 export default {
   name: 'App',
   components: {
+    NavBar,
     HeaderComp,
     WelcomePage
   }
