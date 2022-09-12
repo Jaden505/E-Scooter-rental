@@ -1,16 +1,16 @@
 <template>
-  <HeaderPage></HeaderPage>
+  <HeaderComp></HeaderComp>
   <WelcomePage></WelcomePage>
 </template>
 
 <script>
 import WelcomePage from './components/Welcome.vue'
-import HeaderPage from './components/Header.vue'
+import HeaderComp from './components/Header.vue'
 
 export default {
   name: 'App',
   components: {
-    HeaderPage,
+    HeaderComp,
     WelcomePage
   }
 }
