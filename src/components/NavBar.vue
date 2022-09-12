@@ -1,9 +1,16 @@
 <template>
   <div class="topnav">
-    <a class="active" href="#home">Home</a>
-    <a href="#news">News</a>
-    <a href="#contact">Contact</a>
-    <a href="#about">About</a>
+    <a href="#news">HOME</a>
+    <a href="#contact">SCOOTERS</a>
+    <a href="#about">MY TRIPS</a>
+    <a href="#about">MY ACCOUNT</a>
+    <div class="rightnav">
+      <a href="#about">SIGN UP</a>
+      <a href="#about">LOG IN</a>
+    </div>
+
+
+
   </div>
 </template>
 
@@ -26,6 +33,9 @@ export default {
     padding: 14px 16px;
     text-decoration: none;
     font-size: 17px;
+  }
+  .rightnav{
+    float: right;
   }
 
   .topnav a:hover {
