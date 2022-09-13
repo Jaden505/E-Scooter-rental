@@ -35,6 +35,7 @@ export default {
   }
 
   hr {
-    margin-top: 160px;
+    margin-top: 135px;
+    visibility: hidden;
   }
 </style>

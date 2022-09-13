@@ -17,7 +17,9 @@
     <p>Centraal station: <b>8</b></p>
   </div>
 
-  <div id="middle"></div>
+  <div id="middle">
+  </div>
+
   <div id="right-side"></div>
 </template>
 
