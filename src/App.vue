@@ -2,7 +2,6 @@
   <HeaderComp></HeaderComp>
   <NavBar></NavBar>
   <WelcomePage></WelcomePage>
-
 </template>
 
 <script>

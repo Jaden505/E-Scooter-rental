@@ -31,7 +31,7 @@ export default {
 
   #sub-header {
     float: right;
-    padding-right: 20%;
+    padding-right: 35%;
   }
 
   hr {
