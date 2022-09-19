@@ -1,39 +1,41 @@
 <template>
-  <div id="left-side">
-    <label for="standard-select" >Select a brand</label>
-    <div class="select">
-      <select id="standard-select">
-        <option value="ecooter">Ecooter</option>
-        <option value="niu">NIU</option>
-        <option value="agm">AGM</option>
-        <option value="kymco">Kymco</option>
-        <option value="btc">BTC</option>
-      </select>
+  <section class="u-align-center u-clearfix u-palette-1-base u-section-1" id="welcomSection">
+    <div class="section-1">
+      <label for="standard-select" >Select a brand</label>
+      <div class="select">
+        <select id="standard-select">
+          <option value="ecooter">Ecooter</option>
+          <option value="niu">NIU</option>
+          <option value="agm">AGM</option>
+          <option value="kymco">Kymco</option>
+          <option value="btc">BTC</option>
+        </select>
+      </div>
+
+      <h1>Availability</h1>
+      <p>Leidseplein: <b>12</b></p>
+      <p>Rembrandtplein: <b>23</b></p>
+      <p>Centraal station: <b>8</b></p>
+    </div>
+    <div class="section-2">
+      <h1>Photo Gallary:</h1>
+      <div class="row">
+        <div class="column">
+          <img src="../assets/images/scooter1.jpeg" style="width:100%">
+          <img src="../assets/images/scooter2.jpeg" style="width:100%">
+          <img src="../assets/images/scooter3.jpeg" style="width:100%">
+
+        </div>
+        <div class="column">
+          <img src="../assets/images/scooter4.jpeg" style="width:100%">
+          <img src="../assets/images/scooter5.png" style="width:100%">
+        </div>
+      </div>
     </div>
 
-    <h1>Availability</h1>
-    <p>Leidseplein: <b>12</b></p>
-    <p>Rembrandtplein: <b>23</b></p>
-    <p>Centraal station: <b>8</b></p>
-  </div>
 
-  <div id="middle">
-    <h1>Photo Gallary:</h1>
-    <div class="row">
-      <div class="column">
-        <img src="../assets/images/scooter1.jpeg" style="width:100%">
-        <img src="../assets/images/scooter2.jpeg" style="width:100%">
-        <img src="../assets/images/scooter3.jpeg" style="width:100%">
 
-      </div>
-      <div class="column">
-        <img src="../assets/images/scooter4.jpeg" style="width:100%">
-        <img src="../assets/images/scooter5.png" style="width:100%">
-      </div>
-    </div>
-  </div>
-
-  <div id="right-side"></div>
+  </section>
 </template>
 
 <script>
@@ -43,11 +45,32 @@ export default {
 </script>
 
 <style scoped>
-  #left-side {
+  #welcomSection {
+    position: relative;
+    background-color: lightblue;
+    background-size: cover;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+
+  .section-1{
     float: left;
     padding-left: 2%;
     padding-top: 2%;
-    width: 20%;
+  }
+
+  .section-2{
+    padding-left: 2%;
+    padding-top: 2%;
+  }
+
+
+
+  #right{
+    float: right;
+    padding-right: 2%;
+    padding-top: 2%;
+    width: 25%;
     text-align:center;
   }
 
@@ -64,17 +87,16 @@ export default {
   }
 
   .row {
-    display: -ms-flexbox;
     display: flex;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
     padding: 0 4px;
+    justify-content: space-evenly;
+    align-items: center;
   }
 
   .column {
     -ms-flex: 25%;
     flex: 25%;
-    max-width: 25%;
+    max-width: 20%;
     padding: 0 4px;
   }
 
