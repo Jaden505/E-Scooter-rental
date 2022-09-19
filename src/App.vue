@@ -2,12 +2,19 @@
   <HeaderComp></HeaderComp>
   <NavBar></NavBar>
   <WelcomePage></WelcomePage>
+  <component :is="currentView" />
 </template>
 
 <script>
 import WelcomePage from './components/Welcome.vue'
 import HeaderComp from './components/Header.vue'
 import NavBar from "@/components/NavBar";
+import ScooterOverview from "@/components/ScooterOverview";
+
+const routes = {
+  '/': WelcomePage,
+  '/scooters': ScooterOverview
+}
 
 export default {
   name: 'App',
@@ -15,6 +22,21 @@ export default {
     NavBar,
     HeaderComp,
     WelcomePage
+  },
+  data() {
+    return {
+      currentPath: window.location.hash
+    }
+  },
+  computed: {
+    currentView() {
+      return routes[this.currentPath.slice(1) || '/']
+    }
+  },
+  mounted() {
+    window.addEventListener('hashchange', () => {
+      this.currentPath = window.location.hash
+    })
   }
 }
 </script>

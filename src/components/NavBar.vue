@@ -1,7 +1,7 @@
 <template>
   <div class="topnav">
-    <a href="#news">HOME</a>
-    <a href="#contact">SCOOTERS</a>
+    <a href="#/">HOME</a>
+    <a href="#/scooters">SCOOTERS</a>
     <a href="#about">MY TRIPS</a>
     <a href="#about">MY ACCOUNT</a>
     <div class="rightnav">

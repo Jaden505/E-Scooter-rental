@@ -2,6 +2,7 @@
   <div id="holder">
     <h1 style="    display: inline-block;">E-scooters Amsterdam</h1>
     <br>
+    <h3 id="day" ref="day">Today is </h3>
     <h3 id="sub-header">The easiest way to explore Amsterdam!</h3>
 
     <img src="../assets/images/E-scooter-icon1.jpeg" id="header-icon1" class="icons">
@@ -12,7 +13,15 @@
 
 <script>
 export default {
-  name: "HeaderComp"
+  name: "HeaderComp",
+  mounted() {
+    const day = this.$refs.day;
+
+    let current_day = new Date().toLocaleDateString("en-us", { weekday: 'long' });
+    let current_date = new Date().toISOString().slice(0, 10);
+
+    day.innerHTML += current_day + ", " + current_date;
+  }
 }
 </script>
 
@@ -25,7 +34,7 @@ export default {
     width: 15%;
     height: 25%;
     position: absolute;
-    top: 0px;
+    top: 62px;
     filter: drop-shadow(0px 3px 3px grey);
   }
 
