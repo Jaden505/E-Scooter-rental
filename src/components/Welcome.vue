@@ -48,6 +48,7 @@ export default {
     padding-left: 2%;
     padding-top: 2%;
     width: 20%;
+    text-align:center;
   }
 
   .select {
@@ -98,6 +99,23 @@ export default {
       -ms-flex: 100%;
       flex: 100%;
       max-width: 100%;
+    }
+  }
+
+  #middle {
+    padding-left: 25%;
+  }
+
+  /* Responsive layout - puts left side of page above */
+  @media screen and (max-width: 600px) {
+    #left-side {
+      width: 100%;
+      padding-bottom: 50px;
+    }
+
+    .select {
+      display: block;
+      margin: auto;
     }
   }
 </style>
