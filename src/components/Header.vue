@@ -15,12 +15,18 @@
 export default {
   name: "HeaderComp",
   mounted() {
-    const day = this.$refs.day;
+    this.displayDay();
+  },
 
-    let current_day = new Date().toLocaleDateString("en-us", { weekday: 'long' });
-    let current_date = new Date().toISOString().slice(0, 10);
+  methods: {
+    displayDay() {
+      const day = this.$refs.day;
 
-    day.innerHTML += current_day + ", " + current_date;
+      let current_day = new Date().toLocaleDateString("en-us", {weekday: 'long'});
+      let current_date = new Date().toISOString().slice(0, 10);
+
+      day.innerHTML += current_day + ", " + current_date;
+    }
   }
 }
 </script>

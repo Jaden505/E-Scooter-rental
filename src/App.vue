@@ -1,7 +1,6 @@
 <template>
   <HeaderComp></HeaderComp>
   <NavBar></NavBar>
-  <WelcomePage></WelcomePage>
   <component :is="currentView" />
 </template>
 
