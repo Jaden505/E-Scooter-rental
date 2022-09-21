@@ -11,7 +11,6 @@
           <option value="btc">BTC</option>
         </select>
       </div>
-
       <h1>Availability</h1>
       <p>Leidseplein: <b>12</b></p>
       <p>Rembrandtplein: <b>23</b></p>
