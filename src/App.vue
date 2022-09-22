@@ -9,12 +9,12 @@ import WelcomePage from './components/Welcome.vue'
 import HeaderComp from './components/Header.vue'
 import NavBar from "@/components/NavBar";
 import ScooterOverview from "@/components/ScooterOverview";
-import Overview32 from "@/components/Overview32";
+import DetailOverview from "@/components/DetailOverview";
 
 const routes = {
   '/': WelcomePage,
   '/scooters': ScooterOverview,
-  '/overview': Overview32,
+  '/overview': DetailOverview,
 }
 
 export default {

@@ -27,44 +27,40 @@
 </template>
 
 <script>
-
 export default {
   name: "ScooterOverview",
 
-  mounted() {
-    const scooter_table = this.$scooter_table;
-
-    // Import random-location module
-    let recaptchaScript = document.createElement('script')
-    recaptchaScript.setAttribute('src', 'https://unpkg.com/random-location/dist/randomLocation.umd.js')
-    document.head.appendChild(recaptchaScript)
-
-  },
-
   created() {
-    this.scooters = [];
+    this.importRandLoc()
+
     this.last_id = 30000;
 
     for (let i=0; i<8; i++) {
       this.scooters.push(Scooter.createSampleScooter(this.nextId()))
     }
-
-
-    console.log(this.scooters)
-
   },
 
   methods: {
     nextId() {
       return this.last_id + this.scooters.length;
+    },
+
+    importRandLoc() {
+      // Import random-location module
+      let recaptchaScript = document.createElement('script')
+      recaptchaScript.setAttribute('src', 'https://unpkg.com/random-location/dist/randomLocation.umd.js')
+      document.head.appendChild(recaptchaScript)
     }
+  },
 
-  }
-
-
+  data() {
+    return {
+      scooters: [],
+    }
+  },
 }
-import Scooter from "@/models/scooter";
 
+import Scooter from "@/models/scooter";
 </script>
 
 <style scoped>
