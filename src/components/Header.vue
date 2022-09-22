@@ -38,7 +38,7 @@ export default {
 
   .icons {
     width: 15%;
-    height: 25%;
+    min-height: 15%;
     position: absolute;
     top: 62px;
     filter: drop-shadow(0px 3px 3px grey);

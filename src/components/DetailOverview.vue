@@ -6,7 +6,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="(scooter) in scooters" :key="scooter.id" v-on:click="selected_scooter=scooter; displayDetails()">
+      <tr v-for="(scooter) in scooters" :key="scooter.id" v-on:click="displayDetails(scooter)">
         <td>{{scooter.tag}}</td>
       </tr>
     </tbody>
@@ -27,17 +27,18 @@
       <tr>Total Mileage (km): </tr>
     </th>
     <th>
-      <tr><input type="text" name="Tag" ></tr>
+      <tr><input type="text" id="Tag"></tr>
       <tr>
         <select id="Status">
-          <option>IDLE</option>
-          <option>INUSE</option>
-          <option>MAINTENANCE</option>
+          <option disabled selected value></option>
+          <option value="IDLE">IDLE</option>
+          <option value="INUSE">INUSE</option>
+          <option value="MAINTENANCE">MAINTENANCE</option>
         </select>
       </tr>
-      <tr><input type="number" name="BatteryCharge" ></tr>
-      <tr><input type="text" name="GpsLocation" ></tr>
-      <tr><input type="number" name="Mileage" ></tr>
+      <tr><input type="number" id="BatteryCharge"></tr>
+      <tr><input type="text" id="GpsLocation"></tr>
+      <tr><input type="number" id="Mileage"></tr>
     </th>
 
     </tbody>
@@ -60,7 +61,6 @@ export default {
   data() {
     return {
       scooters: [],
-      selected_scooter: null,
     }
   },
 
@@ -76,7 +76,12 @@ export default {
       document.head.appendChild(recaptchaScript)
     },
 
-    displayDetails() {
+    displayDetails(scooter) {
+      document.getElementById("Tag").value = scooter.tag;
+      document.getElementById("Status").value = scooter.status;
+      document.getElementById("BatteryCharge").value = scooter.batteryCharge;
+      document.getElementById("GpsLocation").value = scooter.gpsLocation["latitude"] + ", " + scooter.gpsLocation["longitude"];
+      document.getElementById("Mileage").value = scooter.mileage;
     },
   }
 }
