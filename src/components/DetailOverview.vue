@@ -6,7 +6,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="(scooter) in scooters" :key="scooter.id" v-on:click="displayDetails(scooter)">
+      <tr v-for="(scooter) in scooters" :key="scooter.id" v-on:click="this.displayDetails(scooter); this.displaySelected($event.target)" class="scooter_id">
         <td>{{scooter.tag}}</td>
       </tr>
     </tbody>
@@ -53,7 +53,7 @@ export default {
     this.importRandLoc()
 
     this.last_id = 30000;
-    for (let i=0; i<8; i++) {
+    for (let i=0; i<12; i++) {
       this.scooters.push(Scooter.createSampleScooter(this.nextId()))
     }
   },
@@ -61,6 +61,7 @@ export default {
   data() {
     return {
       scooters: [],
+      selected_scooter: null,
     }
   },
 
@@ -74,6 +75,15 @@ export default {
       let recaptchaScript = document.createElement('script')
       recaptchaScript.setAttribute('src', 'https://unpkg.com/random-location/dist/randomLocation.umd.js')
       document.head.appendChild(recaptchaScript)
+    },
+
+    displaySelected(elem) {
+      if (this.selected_scooter != null) {
+        this.selected_scooter.classList.remove("selectID");
+      }
+
+      this.selected_scooter = elem;
+      elem.classList.add("selectID");
     },
 
     displayDetails(scooter) {
@@ -100,6 +110,14 @@ table {
   width: 30%;
 }
 
+.scooter_id {
+  cursor: pointer;
+}
+
+.scooter_id:hover {
+  background-color: darkgrey;
+}
+
 #scooter_details {
   margin-left: 30%;
   float: right;
@@ -118,5 +136,9 @@ tr:nth-child(even) {
 
 #detail_labels tr {
   text-align: right;
+}
+
+.selectID {
+  background-color: darkgrey;
 }
 </style>
