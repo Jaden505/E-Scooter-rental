@@ -1,6 +1,5 @@
 <template>
   <section class="u-align-center u-section-1">
-    <h1>Scooters</h1>
     <table class="rwd-table">
       <tr>
         <th>ID</th>
@@ -9,7 +8,7 @@
         <th>GPS location</th>
         <th>Battery charge</th>
       </tr>
-      
+
       <tr v-for="(scooter) in scooters" :key="scooter.id">
         <td data-th="ID">{{scooter.id}}</td>
         <td data-th="Tag">{{scooter.tag}}</td>
@@ -133,7 +132,8 @@ h1 {
   color: #fff;
   border-radius: 0.4em;
   overflow: hidden;
-  width: 60%;
+  margin: 8%;
+  width: 80%;
 }
 .rwd-table tr {
   border-color: #46637f;
@@ -174,12 +174,10 @@ h1 {
     margin-bottom: 0;
     touch-action: manipulation;
     cursor: pointer;
-    background-image: none;
     padding: 8px 12px;
     font-size: 30px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    user-select: none;
-    background: lightblue;
+    color: white;
+    margin: 8px;
+    background: #46637f;
   }
 </style>
