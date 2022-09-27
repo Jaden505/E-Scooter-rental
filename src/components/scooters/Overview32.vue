@@ -1,17 +1,25 @@
 <template>
-  <table ref="scooter_table" id="scooter_table">
-    <thead>
+  <div id="scooter_ids">
+    <table id="scooter_ids_table">
+      <thead>
       <tr>
         <th>Tag</th>
       </tr>
-    </thead>
-    <tbody>
-      <tr v-for="(scooter) in scooters" :key="scooter.id">
+      </thead>
+      <tbody id="scooter_ids_body">
+      <tr v-for="(scooter) in scooters" :key="scooter.id" v-on:click="this.displayDetails(scooter);
+      this.displaySelected($event.target, scooter);" class="scooter_id">
         <td>{{scooter.tag}}</td>
       </tr>
-    </tbody>
-  </table>
+      </tbody>
+    </table>
+  </div>
+
+  <button v-on:click="this.newScooter();" class="newScooter">New scooter</button>
+
   <p>Select a scooter from the list at the left</p>
+
+
 </template>
 
 <script>
@@ -25,20 +33,50 @@ export default {
     document.head.appendChild(recaptchaScript)
   },
 
+  data() {
+    return {
+      scooters: [],
+      selected_scooter: null,
+    }
+  },
+
   created() {
-    this.scooters = [];
+    this.importRandLoc()
+
     this.last_id = 30000;
-    for (let i=0; i<8; i++) {
+    for (let i=0; i<20; i++) {
       this.scooters.push(Scooter.createSampleScooter(this.nextId()))
     }
-    console.log(this.scooters)
-
   },
   methods: {
     nextId() {
       return this.last_id + this.scooters.length;
-    }
+    },
 
+    importRandLoc() {
+      // Import random-location module
+      let recaptchaScript = document.createElement('script')
+      recaptchaScript.setAttribute('src', 'https://unpkg.com/random-location/dist/randomLocation.umd.js')
+      document.head.appendChild(recaptchaScript)
+    },
+
+    newScooter() {
+      let new_scooter = Scooter.createSampleScooter(this.nextId());
+      this.scooters.push(new_scooter);
+
+      this.displayDetails(new_scooter);
+    },
+
+    displaySelected(elem, scooter) {
+      this.selected_scooter = scooter;
+
+      if (this.selected_scooter_elem != null) {
+        this.selected_scooter_elem.classList.remove("selectID");
+      }
+
+      this.selected_scooter_elem = elem;
+      elem.classList.add("selectID");
+    },
   }
 }
 
@@ -47,22 +85,40 @@ import Scooter from "@/models/scooter";
 
 <style scoped>
 table {
-  text-align: center;
   font-family: arial, sans-serif;
   border-collapse: collapse;
-  width: 13px;
 }
 
-p {
-  font-size: 18px;
+#scooter_ids {
+  position: absolute;
+  max-height: 40%;
+  overflow-y: scroll;
 }
-td, th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
+
+#scooter_ids th {
+  width: 30%;
+}
+
+.scooter_id {
+  cursor: pointer;
+  width: 100%;
+}
+
+.scooter_id:hover {
+  background-color: darkgrey;
+}
+
+.selectID {
+  background-color: darkgrey;
 }
 
 tr:nth-child(even) {
   background-color: #dddddd;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
 }
 </style>
