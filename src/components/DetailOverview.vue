@@ -6,15 +6,17 @@
         <th>Tag</th>
       </tr>
     </thead>
-    <tbody>
-      <tr v-for="(scooter) in scooters" :key="scooter.id" v-on:click="this.displayDetails(scooter); this.displaySelected($event.target)" class="scooter_id">
+    <tbody id="scooter_ids_body">
+      <tr v-for="(scooter) in scooters" :key="scooter.id" v-on:click="this.displayDetails(scooter);
+      this.displaySelected($event.target, scooter);" class="scooter_id">
         <td>{{scooter.tag}}</td>
       </tr>
     </tbody>
   </table>
   </div>
 
-  <button v-on:click="newScooter" class="newScooter">New scooter</button>
+  <button v-on:click="this.newScooter();" class="newScooter">New scooter</button>
+  <button v-on:click="this.delScooter();" class="delScooter">Delete scooter</button>
 
   <table ref="scooter_details" id="scooter_details">
     <thead>
@@ -23,7 +25,7 @@
     </tr>
     </thead>
     <tbody>
-    <th id="detail_labels">
+    <th id="detail_labels"> // v-model & sub component
       <tr>Tag: </tr>
       <tr>Status: </tr>
       <tr>Battery Charge (%): </tr>
@@ -66,6 +68,7 @@ export default {
     return {
       scooters: [],
       selected_scooter: null,
+      selected_scooter_elem: null,
     }
   },
 
@@ -81,13 +84,22 @@ export default {
       document.head.appendChild(recaptchaScript)
     },
 
-    displaySelected(elem) {
-      if (this.selected_scooter != null) {
-        this.selected_scooter.classList.remove("selectID");
+    displaySelected(elem, scooter) {
+      this.selected_scooter = scooter;
+
+      if (this.selected_scooter_elem != null) {
+        this.selected_scooter_elem.classList.remove("selectID");
       }
 
-      this.selected_scooter = elem;
+      this.selected_scooter_elem = elem;
       elem.classList.add("selectID");
+    },
+
+    newScooter() {
+      let new_scooter = Scooter.createSampleScooter(this.nextId());
+      this.scooters.push(new_scooter);
+
+      this.displayDetails(new_scooter);
     },
 
     displayDetails(scooter) {
@@ -98,16 +110,10 @@ export default {
       document.getElementById("Mileage").value = scooter.mileage;
     },
 
-    newScooter() {
-      let new_scooter = Scooter.createSampleScooter(this.nextId());
-      this.scooters.push(new_scooter);
+    delScooter() {
+      this.scooters.splice(this.scooters.indexOf(this.selected_scooter), 1);
 
-      this.displayDetails(new_scooter);
-
-      // Get scooter element
-      let table = document.getElementById("scooter_ids_table");
-      let scooter_elem = table.lastElementChild.lastElementChild;
-
+      this.displayDetails(null);
     },
   }
 }
