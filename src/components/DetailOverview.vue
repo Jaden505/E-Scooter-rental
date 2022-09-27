@@ -1,5 +1,6 @@
 <template>
-  <table ref="scooter_ids" id="scooter_ids">
+  <div id="scooter_ids">
+  <table id="scooter_ids_table">
     <thead>
       <tr>
         <th>Tag</th>
@@ -11,6 +12,9 @@
       </tr>
     </tbody>
   </table>
+  </div>
+
+  <button v-on:click="newScooter" class="newScooter">New scooter</button>
 
   <table ref="scooter_details" id="scooter_details">
     <thead>
@@ -53,7 +57,7 @@ export default {
     this.importRandLoc()
 
     this.last_id = 30000;
-    for (let i=0; i<12; i++) {
+    for (let i=0; i<20; i++) {
       this.scooters.push(Scooter.createSampleScooter(this.nextId()))
     }
   },
@@ -93,6 +97,18 @@ export default {
       document.getElementById("GpsLocation").value = scooter.gpsLocation["latitude"] + ", " + scooter.gpsLocation["longitude"];
       document.getElementById("Mileage").value = scooter.mileage;
     },
+
+    newScooter() {
+      let new_scooter = Scooter.createSampleScooter(this.nextId());
+      this.scooters.push(new_scooter);
+
+      this.displayDetails(new_scooter);
+
+      // Get scooter element
+      let table = document.getElementById("scooter_ids_table");
+      let scooter_elem = table.lastElementChild.lastElementChild;
+
+    },
   }
 }
 
@@ -103,19 +119,36 @@ import Scooter from "@/models/scooter";
 table {
   font-family: arial, sans-serif;
   border-collapse: collapse;
-  position: fixed;
 }
 
 #scooter_ids {
+  position: absolute;
+  max-height: 40%;
+  overflow-y: scroll;
+}
+
+#scooter_ids th {
   width: 30%;
+}
+
+.newScooter {
+  position: absolute;
 }
 
 .scooter_id {
   cursor: pointer;
+  width: 100%;
 }
 
 .scooter_id:hover {
   background-color: darkgrey;
+}
+
+/* Responsive layout - Puts edit field underneath id field */
+@media screen and (max-width: 1000px) {
+  #scooter_ids {
+    position: static;
+  }
 }
 
 #scooter_details {
