@@ -8,8 +8,8 @@
 import WelcomePage from './components/Welcome.vue'
 import HeaderComp from './components/Header.vue'
 import NavBar from "@/components/NavBar";
-import ScooterOverview from "@/components/ScooterOverview";
-import DetailOverview from "@/components/DetailOverview";
+import ScooterOverview from "@/components/scooters/Overview31";
+import DetailOverview from "@/components/scooters/Detail32";
 
 const routes = {
   '/': WelcomePage,

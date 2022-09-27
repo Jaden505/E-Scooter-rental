@@ -25,7 +25,8 @@
     </tr>
     </thead>
     <tbody>
-    <th id="detail_labels"> // v-model & sub component
+    <!--  v-model & sub component  -->
+    <th id="detail_labels">
       <tr>Tag: </tr>
       <tr>Status: </tr>
       <tr>Battery Charge (%): </tr>

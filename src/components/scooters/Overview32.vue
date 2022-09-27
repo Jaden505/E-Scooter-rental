@@ -19,8 +19,6 @@ export default {
   name: "OverView32",
 
   mounted() {
-    const scooter_table = this.$scooter_table;
-
     // Import random-location module
     let recaptchaScript = document.createElement('script')
     recaptchaScript.setAttribute('src', 'https://unpkg.com/random-location/dist/randomLocation.umd.js')
