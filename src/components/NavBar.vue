@@ -1,17 +1,14 @@
 <template>
-  <div class="topnav">
-    <a href="#/">HOME</a>
-    <a href="#/scooters">SCOOTERS</a>
-    <a href="#about">MY TRIPS</a>
-    <a href="#about">MY ACCOUNT</a>
-    <div class="rightnav">
-      <a href="#about">SIGN UP</a>
-      <a href="#about">LOG IN</a>
+    <div class="topnav">
+      <a href="#/">HOME</a>
+      <a href="#/scooters">SCOOTERS</a>
+      <a href="#about">MY TRIPS</a>
+      <a href="#about">MY ACCOUNT</a>
+      <div class="rightnav">
+        <a href="#about">SIGN UP</a>
+        <a href="#about">LOG IN</a>
+      </div>
     </div>
-
-
-
-  </div>
 </template>
 
 <script>
@@ -20,7 +17,9 @@ export default {
 }
 </script>
 
+
 <style scoped>
+
   .topnav {
     overflow: hidden;
     background-color: #333;
