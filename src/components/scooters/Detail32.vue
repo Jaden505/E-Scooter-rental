@@ -15,18 +15,19 @@
       <tr>Total Mileage (km): </tr>
     </th>
     <th>
-      <tr><input type="text" id="Tag"></tr>
+
+      <tr><input type="text" :value="scooter.tag"></tr>
       <tr>
-        <select id="Status">
+        <select :value="scooter.status">
           <option disabled selected value></option>
           <option value="IDLE">IDLE</option>
           <option value="INUSE">INUSE</option>
           <option value="MAINTENANCE">MAINTENANCE</option>
         </select>
       </tr>
-      <tr><input type="number" id="BatteryCharge"></tr>
-      <tr><input type="text" id="GpsLocation"></tr>
-      <tr><input type="number" id="Mileage"></tr>
+      <tr><input type="number" :value="scooter.batteryCharge"></tr>
+      <tr><input type="text" :value="scooter.gpsLocation"></tr>
+      <tr><input type="number" :value="scooter.mileage"></tr>
     </th>
     </tbody>
   </table>
@@ -37,16 +38,9 @@
 <script>
 export default {
   name: "DetailOverview",
+  props: ['scooter'],
 
   methods: {
-    displayDetails(scooter) {
-      document.getElementById("Tag").value = scooter.tag;
-      document.getElementById("Status").value = scooter.status;
-      document.getElementById("BatteryCharge").value = scooter.batteryCharge;
-      document.getElementById("GpsLocation").value = scooter.gpsLocation["latitude"] + ", " + scooter.gpsLocation["longitude"];
-      document.getElementById("Mileage").value = scooter.mileage;
-    },
-
     delScooter() {
       this.scooters.splice(this.scooters.indexOf(this.selected_scooter), 1);
 
@@ -54,8 +48,6 @@ export default {
     },
   }
 }
-
-import Scooter from "@/models/scooter";
 </script>
 
 <style scoped>

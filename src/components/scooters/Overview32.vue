@@ -7,8 +7,7 @@
       </tr>
       </thead>
       <tbody id="scooter_ids_body">
-      <tr v-for="(scooter) in scooters" :key="scooter.id" v-on:click="this.displayDetails(scooter);
-      this.displaySelected($event.target, scooter);" class="scooter_id">
+      <tr v-for="(scooter) in scooters" :key="scooter.id" class="scooter_id" v-on:click="this.displaySelected($event.target, scooter)">
         <td>{{scooter.tag}}</td>
       </tr>
       </tbody>
@@ -17,14 +16,19 @@
 
   <button v-on:click="this.newScooter();" class="newScooter">New scooter</button>
 
-  <p>Select a scooter from the list at the left</p>
+  <p v-if="this.selected_scooter == null">Select a scooter from the list at the left</p>
 
-
+  <Detail32 v-else :scooter="selected_scooter"></Detail32>
 </template>
 
 <script>
+import Detail32 from "@/components/scooters/Detail32";
+
 export default {
   name: "OverView32",
+  components: {
+    Detail32
+  },
 
   mounted() {
     // Import random-location module
@@ -37,6 +41,7 @@ export default {
     return {
       scooters: [],
       selected_scooter: null,
+      selected_elem: null,
     }
   },
 
@@ -48,6 +53,7 @@ export default {
       this.scooters.push(Scooter.createSampleScooter(this.nextId()))
     }
   },
+
   methods: {
     nextId() {
       return this.last_id + this.scooters.length;
@@ -68,13 +74,11 @@ export default {
     },
 
     displaySelected(elem, scooter) {
+      if (this.selected_elem != null) {this.selected_elem.classList.remove("selectID");}
+
+      this.selected_elem = elem;
       this.selected_scooter = scooter;
 
-      if (this.selected_scooter_elem != null) {
-        this.selected_scooter_elem.classList.remove("selectID");
-      }
-
-      this.selected_scooter_elem = elem;
       elem.classList.add("selectID");
     },
   }

@@ -9,8 +9,6 @@ import WelcomePage from './components/Welcome.vue'
 import HeaderComp from './components/Header.vue'
 import NavBar from "@/components/NavBar";
 import ScooterOverview from "@/components/scooters/Overview31";
-import ScooterOverview2 from "@/components/scooters/Overview32";
-import DetailOverview from "@/components/scooters/Detail32";
 import Overview32 from "@/components/scooters/Overview32";
 
 const routes = {
