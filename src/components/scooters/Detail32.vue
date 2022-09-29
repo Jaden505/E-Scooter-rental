@@ -58,7 +58,7 @@ export default {
 
   methods: {
     delScooter() {
-      console.log(this.scooter_d)
+
     },
   }
 }

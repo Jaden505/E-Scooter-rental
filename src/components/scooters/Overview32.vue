@@ -79,12 +79,6 @@ export default {
 
       elem.classList.add("selectID");
     },
-
-    getScooterByTag() {
-      let table = document.getElementById("scooter_ids_table");
-
-      console.log(table.rows[table.rows.length-1]);
-    },
   }
 }
 
