@@ -1,6 +1,6 @@
 <template>
-  <div id="scooter_ids">
-    <table id="scooter_ids_table">
+  <div id="scooter_ids" ref="scroll">
+    <table id="scooter_ids_table" ref="table_scooters">
       <thead>
       <tr>
         <th>Tag</th>
@@ -69,6 +69,17 @@ export default {
     newScooter() {
       let new_scooter = Scooter.createSampleScooter(this.nextId());
       this.scooters.push(new_scooter);
+
+      // Wait for new scooter element to be added
+      setTimeout(function(){
+        let table_rows = this.$refs.table_scooters.rows;
+        let scooter_elem = table_rows[table_rows.length-1];
+
+        this.displaySelected(scooter_elem, new_scooter)
+
+        // Scroll to bottom
+        this.$refs.scroll.scrollTop = this.$refs.scroll.scrollHeight;
+      }.bind(this), 0);
     },
 
     displaySelected(elem, scooter) {
