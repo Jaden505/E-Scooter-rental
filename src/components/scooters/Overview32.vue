@@ -18,7 +18,7 @@
 
   <p v-if="this.selected_scooter == null">Select a scooter from the list at the left</p>
 
-  <Detail32 v-else :scooter="selected_scooter"></Detail32>
+  <Detail32 v-else :scooter="selected_scooter" :scooters="scooters"></Detail32>
 </template>
 
 <script>
@@ -69,8 +69,6 @@ export default {
     newScooter() {
       let new_scooter = Scooter.createSampleScooter(this.nextId());
       this.scooters.push(new_scooter);
-
-      this.displayDetails(new_scooter);
     },
 
     displaySelected(elem, scooter) {
@@ -80,6 +78,12 @@ export default {
       this.selected_scooter = scooter;
 
       elem.classList.add("selectID");
+    },
+
+    getScooterByTag() {
+      let table = document.getElementById("scooter_ids_table");
+
+      console.log(table.rows[table.rows.length-1]);
     },
   }
 }

@@ -16,18 +16,18 @@
     </th>
     <th>
 
-      <tr><input type="text" :value="scooter.tag"></tr>
+      <tr><input type="text" v-model="scooter_d.tag"></tr>
       <tr>
-        <select :value="scooter.status">
+        <select v-model="scooter_d.status">
           <option disabled selected value></option>
           <option value="IDLE">IDLE</option>
           <option value="INUSE">INUSE</option>
           <option value="MAINTENANCE">MAINTENANCE</option>
         </select>
       </tr>
-      <tr><input type="number" :value="scooter.batteryCharge"></tr>
-      <tr><input type="text" :value="scooter.gpsLocation"></tr>
-      <tr><input type="number" :value="scooter.mileage"></tr>
+      <tr><input type="number" v-model="scooter_d.batteryCharge"></tr>
+      <tr><input type="text" v-model="scooter_d.gpsLocation"></tr>
+      <tr><input type="number" v-model="scooter_d.mileage"></tr>
     </th>
     </tbody>
   </table>
@@ -38,13 +38,27 @@
 <script>
 export default {
   name: "DetailOverview",
-  props: ['scooter'],
+  props: ['scooter', 'scooters'],
+
+  watch: {
+    scooter: function(newVal) {
+      this.scooter_d = newVal;
+    },
+    scooters: function(newVal) {
+      this.scooters_d = newVal;
+    }
+  },
+
+  data() {
+    return {
+      scooters_d: this.scooters,
+      scooter_d: this.scooter,
+    }
+  },
 
   methods: {
     delScooter() {
-      this.scooters.splice(this.scooters.indexOf(this.selected_scooter), 1);
-
-      this.displayDetails(null);
+      console.log(this.scooter_d)
     },
   }
 }
