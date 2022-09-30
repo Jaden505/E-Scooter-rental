@@ -26,13 +26,13 @@
         </select>
       </tr>
       <tr><input type="number" v-model="scooter_d.batteryCharge"></tr>
-      <tr><input type="text" v-model="scooter_d.gpsLocation"></tr>
+      <tr><input type="text" v-model="scooter_d.gpsLocation.longitude"></tr>
       <tr><input type="number" v-model="scooter_d.mileage"></tr>
     </th>
     </tbody>
   </table>
 
-  <button v-on:click="this.delScooter();" class="delScooter">Delete scooter</button>
+  <button v-on:click="$emit('delScooter')" class="delScooter">Delete scooter</button>
 </template>
 
 <script>
@@ -55,12 +55,6 @@ export default {
       scooter_d: this.scooter,
     }
   },
-
-  methods: {
-    delScooter() {
-
-    },
-  }
 }
 </script>
 
