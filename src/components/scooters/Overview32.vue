@@ -18,7 +18,7 @@
 
   <p v-if="this.selected_scooter == null">Select a scooter from the list at the left</p>
 
-  <Detail32 v-else :scooter="selected_scooter" :scooters="scooters"></Detail32>
+  <Detail32 v-else :scooter="selected_scooter" :scooters="scooters" @delScooter="this.delScooter()" />
 </template>
 
 <script>
@@ -70,16 +70,18 @@ export default {
       let new_scooter = Scooter.createSampleScooter(this.nextId());
       this.scooters.push(new_scooter);
 
+      setTimeout(f => this.selectNewScooter(new_scooter), 100);
+    },
+
+    selectNewScooter(new_scooter) {
       // Wait for new scooter element to be added
-      setTimeout(function(){
-        let table_rows = this.$refs.table_scooters.rows;
-        let scooter_elem = table_rows[table_rows.length-1];
+      let table_rows = this.$refs.table_scooters.rows;
+      let scooter_elem = table_rows[table_rows.length-1];
 
-        this.displaySelected(scooter_elem, new_scooter)
+      this.displaySelected(scooter_elem, new_scooter)
 
-        // Scroll to bottom
-        this.$refs.scroll.scrollTop = this.$refs.scroll.scrollHeight;
-      }.bind(this), 0);
+      // Scroll to bottom
+      this.$refs.scroll.scrollTop = this.$refs.scroll.scrollHeight;
     },
 
     displaySelected(elem, scooter) {
@@ -90,6 +92,13 @@ export default {
 
       elem.classList.add("selectID");
     },
+
+    delScooter() {
+      this.scooters.splice(this.scooters.indexOf(this.selected_scooter), 1);
+
+      this.selected_scooter = null;
+      this.selected_elem = null;
+    }
   }
 }
 
@@ -121,12 +130,12 @@ table {
   background-color: darkgrey;
 }
 
-.selectID {
-  background-color: darkgrey;
-}
-
 tr:nth-child(even) {
   background-color: #dddddd;
+}
+
+.selectID {
+  background-color: darkgrey;
 }
 
 td, th {
