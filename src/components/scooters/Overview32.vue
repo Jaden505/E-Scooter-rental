@@ -7,7 +7,7 @@
       </tr>
       </thead>
       <tbody id="scooter_ids_body">
-      <tr v-for="(scooter) in scooters" :key="scooter.id" class="scooter_id" v-on:click="this.displaySelected($event.target, scooter)">
+      <tr v-for="(scooter) in scooters" :key="scooter.id" class="scooter_id" v-on:click="this.selected_scooter=scooter" :class="{selectID: selected_scooter===scooter}">
         <td>{{scooter.tag}}</td>
       </tr>
       </tbody>
@@ -41,7 +41,6 @@ export default {
     return {
       scooters: [],
       selected_scooter: null,
-      selected_elem: null,
     }
   },
 
@@ -74,30 +73,15 @@ export default {
     },
 
     selectNewScooter(new_scooter) {
-      // Wait for new scooter element to be added
-      let table_rows = this.$refs.table_scooters.rows;
-      let scooter_elem = table_rows[table_rows.length-1];
-
-      this.displaySelected(scooter_elem, new_scooter)
+      this.selected_scooter = new_scooter;
 
       // Scroll to bottom
       this.$refs.scroll.scrollTop = this.$refs.scroll.scrollHeight;
     },
 
-    displaySelected(elem, scooter) {
-      if (this.selected_elem != null) {this.selected_elem.classList.remove("selectID");}
-
-      this.selected_elem = elem;
-      this.selected_scooter = scooter;
-
-      elem.classList.add("selectID");
-    },
-
     delScooter() {
       this.scooters.splice(this.scooters.indexOf(this.selected_scooter), 1);
-
       this.selected_scooter = null;
-      this.selected_elem = null;
     }
   }
 }
