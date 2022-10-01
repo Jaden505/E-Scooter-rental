@@ -197,4 +197,23 @@ input:focus ~ .highlight {
 }
 
 
+@media (min-width: 1200px){
+  .container {
+    width: 320px;
+    margin-top: 62px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  #scooter_ids[data-v-5bb42ce5] {
+    margin-left: 82px;
+    margin-top: 75px;
+  }
+  .container {
+    width: 320px;
+    margin-top: 337px;
+  }
+}
+
+
 </style>
