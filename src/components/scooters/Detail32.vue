@@ -2,7 +2,7 @@
   <table ref="scooter_details" id="scooter_details">
     <thead>
     <tr>
-      <th>Scooter details</th>
+      <th>Scooter details <span>({{ scooter_d.id }})</span></th>
     </tr>
     </thead>
     <tbody>
