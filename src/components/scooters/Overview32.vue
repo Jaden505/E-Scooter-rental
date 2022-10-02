@@ -114,10 +114,6 @@ table {
   background-color: darkgrey;
 }
 
-tr:nth-child(even) {
-  background-color: #dddddd;
-}
-
 .selectID {
   background-color: darkgrey;
 }
