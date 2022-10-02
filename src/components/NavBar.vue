@@ -1,7 +1,7 @@
 <template>
     <div class="topnav">
-      <a href="#/">HOME</a>
-      <a href="#/scooters">SCOOTERS</a>
+      <a><router-link to="/">HOME</router-link></a>
+      <a><router-link to="/scooters/overview31">SCOOTERS</router-link></a>
       <a href="#about">MY TRIPS</a>
       <a href="#about">MY ACCOUNT</a>
       <div class="rightnav">

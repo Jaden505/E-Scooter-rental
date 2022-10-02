@@ -5,11 +5,12 @@ import overview32 from "@/components/scooters/Overview32";
 
 const routes = [
     {path : "/", component: Welcome},
-    {path : "/scooters/", component: overview31},
-    {path : "/scooters/overview", component: overview32}
+    {path : "/home", component: Welcome},
+    {path : "/scooters/overview31", component: overview31},
+    {path : "/scooters/overview32", component: overview32}
 ];
 
 export const router = createRouter({
-    history : {createWebHashHistory},
+    history : createWebHashHistory(),
     routes
 })

@@ -20,7 +20,7 @@
 
     </table>
     <div class="button">
-      <a href="#/overview" id="detailStyle" class="btn btn-outline-secondary">Detail</a>
+      <a id="detailStyle" class="btn btn-outline-secondary"><router-link to="/scooters/overview32">Detail</router-link></a>
     </div>
   </section>
 </template>
