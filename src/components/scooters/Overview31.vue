@@ -6,7 +6,8 @@
         <th>Tag</th>
         <th>Status</th>
         <th>GPS location</th>
-        <th>Battery charge</th>
+        <th>Mileage:</th>
+        <th>Battery charge:</th>
       </tr>
 
       <tr v-for="(scooter) in scooters" :key="scooter.id">
@@ -15,7 +16,7 @@
         <td data-th="Status">{{scooter.status}}</td>
         <td data-th="Gpslocation">{{scooter.gpsLocation}}</td>
         <td data-th="Mileage">{{scooter.mileage}}</td>
-        <td data-th="BatteryCharge">{{scooter.batteryCharge}}</td>
+        <td data-th="BatteryCharge">{{scooter.batteryCharge}}%</td>
       </tr>
 
     </table>

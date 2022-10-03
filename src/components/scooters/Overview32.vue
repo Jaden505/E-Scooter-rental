@@ -232,4 +232,12 @@ tr:nth-child(even) {
 }
 
 
+@media only screen and (max-width: 600px) {
+  #scooter_ids {
+    position: absolute;
+    max-height: 23%;
+    margin-top: 162px;
+  }
+}
+
 </style>
