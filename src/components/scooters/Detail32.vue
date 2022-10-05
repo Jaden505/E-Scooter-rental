@@ -26,7 +26,7 @@
         <input type="text" v-model="scooter_d.batteryCharge" required>
         <span class="highlight"></span>
         <span class="bar"></span>
-        <label>Email</label>
+        <label>Battery charge:</label>
       </div>
       <div class="group">
         <input type="text" v-model="scooter_d.gpsLocation.longitude" required>
@@ -205,10 +205,13 @@ input:focus ~ .highlight {
 }
 
 @media only screen and (max-width: 600px) {
-  #scooter_ids[data-v-5bb42ce5] {
-    margin-left: 82px;
-    margin-top: 75px;
+  #scooter_ids{
+    position: absolute;
+    max-height: 23%;
+    margin-top: 162px;
   }
+
+
   .container {
     width: 320px;
     margin-top: 337px;
