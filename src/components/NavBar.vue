@@ -2,8 +2,9 @@
     <div class="topnav">
       <a><router-link to="/">HOME</router-link></a>
       <a><router-link to="/scooters/overview31">SCOOTERS</router-link></a>
-      <a href="#about">MY TRIPS</a>
-      <a href="#about">MY ACCOUNT</a>
+
+      <a>MY TRIPS</a>
+      <a>MY ACCOUNT</a>
       <div class="rightnav">
         <a href="#about">SIGN UP</a>
         <a href="#about">LOG IN</a>
@@ -18,7 +19,6 @@ export default {
 
 
 <style scoped>
-
   .topnav {
     overflow: hidden;
     background-color: #333;
@@ -40,7 +40,4 @@ export default {
     background-color: #ddd;
     color: black;
   }
-
-
-
 </style>
