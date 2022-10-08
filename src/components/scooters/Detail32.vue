@@ -5,14 +5,14 @@
   <div class="container">
     <form>
       <div class="group">
-        <input type="text" :value="this.getScooterAttribute('tag')" required>
+        <input type="text" v-model="scooter.tag" required>
         <span class="highlight"></span>
         <span class="bar"></span>
         <label>Tag:</label>
       </div>
 
       <div class="group">
-        <select :value="this.getScooterAttribute('status')">
+        <select v-model="scooter.status">
           <option disabled selected value></option>
           <option value="IDLE">IDLE</option>
           <option value="INUSE">INUSE</option>
@@ -23,21 +23,20 @@
       </div>
 
       <div class="group">
-        <input type="text" :value="this.getScooterAttribute('batteryCharge')" required>
+        <input type="text" v-model="scooter.batteryCharge" required>
         <span class="highlight"></span>
         <span class="bar"></span>
         <label>Battery charge:</label>
       </div>
-
       <div class="group">
-        <input type="text" :value="this.getScooterAttribute('gpsLocation')" required>
+        <input type="text" v-model="scooter.gpsLocation.longitude" required>
         <span class="highlight"></span>
         <span class="bar"></span>
         <label>GPS Location:</label>
       </div>
 
       <div class="group">
-        <input type="text" :value="this.getScooterAttribute('mileage')" required>
+        <input type="text"  v-model="scooter.mileage" required>
         <span class="highlight"></span>
         <span class="bar"></span>
         <label>Total Mileage (km):</label>
@@ -49,25 +48,23 @@
 <script>
 export default {
   name: "DetailOverview",
-  props: ['scooter'],
+  props: ['scooter_d'],
 
-  methods: {
-    getScooterAttribute(attribute) {
-      if (attribute === "gpsLocation") {return this.scooter.gpsLocation.longitude + ', ' + this.scooter.gpsLocation.latitude}
+  watch: {
+    scooter: function(newVal) {
+      this.scooter = newVal;
+    },
+  },
 
-      return this.scooter[attribute];
+  data() {
+    return {
+      scooter: this.scooter_d,
     }
-  }
+  },
 }
 </script>
 
 <style scoped>
-#scooter_details {
-  margin-left: 30%;
-  float: right;
-  width: 70%;
-}
-
 td, th {
   border: 1px solid #dddddd;
   text-align: left;
@@ -209,6 +206,4 @@ input:focus ~ .highlight {
     margin-top: 337px;
   }
 }
-
-
 </style>

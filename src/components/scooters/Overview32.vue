@@ -18,7 +18,7 @@
 
   <p v-if="this.selected_scooter == null">Select a scooter from the list at the left</p>
 
-  <Detail32 v-else :scooter="selected_scooter" @delScooter="this.delScooter()" />
+  <Detail32 v-else :scooter_d="selected_scooter" @delScooter="this.delScooter()" />
 </template>
 
 <script>
