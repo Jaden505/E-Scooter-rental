@@ -47,7 +47,7 @@
 
 <script>
 export default {
-  name: "DetailOverview",
+  name: "DetailOverview32",
   props: ['scooter_d'],
 
   watch: {
