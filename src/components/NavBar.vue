@@ -6,8 +6,8 @@
       <a>MY TRIPS</a>
       <a>MY ACCOUNT</a>
       <div class="rightnav">
-        <a href="#about">SIGN UP</a>
-        <a href="#about">LOG IN</a>
+        <a href="/sign-up">SIGN UP</a>
+        <a href="/sign-in">LOG IN</a>
       </div>
     </div>
 </template>

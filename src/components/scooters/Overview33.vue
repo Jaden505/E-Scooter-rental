@@ -25,9 +25,15 @@
 import Detail32 from "@/components/scooters/Detail32";
 
 export default {
-  name: "OverView32",
+  name: "OverView33",
   components: {
     Detail32
+  },
+
+  watch: {
+    '$route'() {
+      this.selected_scooter = this.findSelectedFromRouteParam();
+    }
   },
 
   mounted() {
@@ -81,7 +87,24 @@ export default {
     },
 
     onSelect(scooter) {
-      (scooter === this.selected_scooter) ? this.selected_scooter = null : this.selected_scooter = scooter;
+      if (scooter != null && scooter !== this.selected_scooter) {
+        this.$router.push(this.$route.matched[0].path + "/" + scooter.id);
+      }
+      else if (this.selected_scooter != null) {
+        this.$router.push("/scooters/overview33")
+      }
+    },
+
+    findSelectedFromRouteParam() {
+      let id = this.$route.params.id;
+
+      for (let scooter in this.scooters) {
+        if (scooter.id === id) {
+          return scooter;
+        }
+      }
+
+      return null;
     }
   }
 }
@@ -235,5 +258,4 @@ td, th {
     margin-top: 162px;
   }
 }
-
 </style>

@@ -5,14 +5,14 @@
   <div class="container">
     <form>
       <div class="group">
-        <input type="text" v-model="scooter_d.tag" required>
+        <input type="text" :value="this.getScooterAttribute('tag')" required>
         <span class="highlight"></span>
         <span class="bar"></span>
         <label>Tag:</label>
       </div>
 
       <div class="group">
-        <select v-model="scooter_d.status">
+        <select :value="this.getScooterAttribute('status')">
           <option disabled selected value></option>
           <option value="IDLE">IDLE</option>
           <option value="INUSE">INUSE</option>
@@ -23,20 +23,21 @@
       </div>
 
       <div class="group">
-        <input type="text" v-model="scooter_d.batteryCharge" required>
+        <input type="text" :value="this.getScooterAttribute('batteryCharge')" required>
         <span class="highlight"></span>
         <span class="bar"></span>
         <label>Battery charge:</label>
       </div>
+
       <div class="group">
-        <input type="text" v-model="scooter_d.gpsLocation.longitude" required>
+        <input type="text" :value="this.getScooterAttribute('gpsLocation')" required>
         <span class="highlight"></span>
         <span class="bar"></span>
         <label>GPS Location:</label>
       </div>
 
       <div class="group">
-        <input type="text"  v-model="scooter_d.mileage" required>
+        <input type="text" :value="this.getScooterAttribute('mileage')" required>
         <span class="highlight"></span>
         <span class="bar"></span>
         <label>Total Mileage (km):</label>
@@ -48,24 +49,15 @@
 <script>
 export default {
   name: "DetailOverview",
-  props: ['scooter', 'scooters'],
+  props: ['scooter'],
 
-  watch: {
-    scooter: function(newVal) {
-      this.scooter_d = newVal;
-    },
-    scooters: function(newVal) {
-      this.scooters_d = newVal;
+  methods: {
+    getScooterAttribute(attribute) {
+      if (attribute === "gpsLocation") {return this.scooter.gpsLocation.longitude + ', ' + this.scooter.gpsLocation.latitude}
+
+      return this.scooter[attribute];
     }
-  },
-
-
-  data() {
-    return {
-      scooters_d: this.scooters,
-      scooter_d: this.scooter,
-    }
-  },
+  }
 }
 </script>
 
