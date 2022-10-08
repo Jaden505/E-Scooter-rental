@@ -91,6 +91,7 @@ export default {
         this.$router.push(this.$route.matched[0].path + "/" + scooter.id);
       }
       else if (this.selected_scooter != null) {
+        this.selected_scooter = null;
         this.$router.push("/scooters/overview33")
       }
     },
@@ -98,13 +99,9 @@ export default {
     findSelectedFromRouteParam() {
       let id = this.$route.params.id;
 
-      for (let scooter in this.scooters) {
-        if (scooter.id === id) {
-          return scooter;
-        }
-      }
-
-      return null;
+      return this.scooters.find(function (scooter) {
+        if (id == scooter.id) {return scooter;}
+      })
     }
   }
 }
