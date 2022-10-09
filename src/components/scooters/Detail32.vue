@@ -1,6 +1,4 @@
 <template>
-
-
   <button v-on:click="$emit('delScooter')" class="buttonScooter">Delete scooter</button>
   <div class="container">
     <form>

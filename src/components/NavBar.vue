@@ -1,23 +1,24 @@
 <template>
-    <div class="topnav">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <div class="navbar">
       <a><router-link to="/">HOME</router-link></a>
 
       <div class="dropdown">
-        <button class="dropbtn">SCOOTERS</button>
-        <div class="dropdown-content">
-          <a><router-link to="/scooters/overview31">All scooters</router-link></a>
-          <a><router-link to="/scooters/overview32">Scooters edit (comp)</router-link></a>
-          <a><router-link to="/scooters/overview33">Scooters edit (router)</router-link></a>
-          <a><router-link to="/scooters/overview34">Scooters edit (managed)</router-link></a>
-          <a><router-link to="/scooters/overview34">Scooters edit (guarded)</router-link></a>
+        <button class="mainmenubtn">SCOOTERS</button>
+        <div class="dropdown-child">
+          <a href="#"><router-link to="/scooters/overview31">Scooters overview</router-link></a>
+          <a href="#"><router-link to="/scooters/overview32">Scooters overview</router-link></a>
+          <a href="#">Available Scooters</a>
+          <a href="#">Abandonned Scooters</a>
         </div>
       </div>
-
-      <a>MY TRIPS</a>
-      <a>MY ACCOUNT</a>
+      <a href="#about">MY TRIPS</a>
+      <a href="#about">MY ACCOUNT</a>
       <div class="rightnav">
-        <a href="/sign-up">SIGN UP</a>
-        <a href="/sign-in">LOG IN</a>
+        <a href="#about">SIGN UP</a>
+        <a href="#about">LOG IN</a>
       </div>
     </div>
 </template>
@@ -25,70 +26,105 @@
 export default {
   name: "NavBar"
 }
+
 </script>
 
 
 <style scoped>
-  .topnav {
-    background-color: #333;
-  }
 
-  .topnav a {
-    float: left;
-    color: #f2f2f2;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
-  }
   .rightnav{
     float: right;
   }
 
-  .topnav a:hover {
-    background-color: #ddd;
-    color: black;
+  .navbar {
+    overflow: hidden;
+    background-color: #333;
+    font-family: Arial, Helvetica, sans-serif;
   }
 
-  /* Dropdown Button */
-  .dropbtn {
-    background-color: #04AA6D;
+  .navbar a {
+    float: left;
+    font-size: 16px;
     color: white;
-    padding: 16px;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+
+  .dropdown {
+    float: left;
+    overflow: hidden;
+  }
+
+  .dropdown .dropbtn {
+    cursor: pointer;
     font-size: 16px;
     border: none;
+    outline: none;
+    color: white;
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
   }
 
-  /* The container <div> - needed to position the dropdown content */
-  .dropdown {
-    position: relative;
-    display: inline-block;
+  .navbar a:hover, .dropdown:hover .dropbtn, .dropbtn:focus {
+    background-color: red;
   }
 
-  /* Dropdown Content (Hidden by Default) */
   .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #f1f1f1;
+    background-color: #f9f9f9;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
   }
 
-  /* Links inside the dropdown */
   .dropdown-content a {
+    float: none;
     color: black;
-    padding: 12px 16px;
+    /*padding: 12px 16px;*/
     text-decoration: none;
+    display: block;
+    text-align: left;
+  }
+
+  .dropdown-content a:hover {
+    background-color: #ddd;
+  }
+
+  .show {
     display: block;
   }
 
-  /* Change color of dropdown links on hover */
-  .dropdown-content a:hover {background-color: #ddd;}
+  .mainmenubtn {
+    background-color: #333;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-top:20px;
+  }
 
-  /* Show the dropdown menu on hover */
-  .dropdown:hover .dropdown-content {display: block;}
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
 
-  /* Change the background color of the dropdown button when the dropdown content is shown */
-  .dropdown:hover .dropbtn {background-color: #3e8e41;}
+  .dropdown-child {
+    display: none;
+    min-width: 200px;
+    overflow: hidden;
+  }
+
+  .dropdown-child a {
+    padding: 20px;
+    display: block;
+  }
+
+  .dropdown:hover .dropdown-child {
+    display: flex;
+    flex-direction: column;
+  }
+
 </style>
