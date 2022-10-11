@@ -1,216 +1,172 @@
 <template>
-  <div id="scooter_ids" ref="scroll">
-    <table class="rwd-table" id="scooter_ids_table" ref="table_scooters">
-      <thead>
-      <tr>
-        <th>Tag</th>
-      </tr>
-      </thead>
-      <tbody id="scooter_ids_body">
-      <tr v-for="(scooter) in scooters" :key="scooter.id" class="scooter_id" v-on:click="onSelect(scooter)" :class="{selectID: selected_scooter===scooter}">
-        <td>{{scooter.tag}}</td>
-      </tr>
-      </tbody>
-    </table>
+  <button v-on:click="$emit('delScooter')" class="buttonScooter">Delete scooter</button>
+  <div class="container">
+    <form>
+      <div class="group">
+        <input type="text" v-model="scooter.tag" required>
+        <span class="highlight"></span>
+        <span class="bar"></span>
+        <label>Tag:</label>
+      </div>
+
+      <div class="group">
+        <select v-model="scooter.status">
+          <option disabled selected value></option>
+          <option value="IDLE">IDLE</option>
+          <option value="INUSE">INUSE</option>
+          <option value="MAINTENANCE">MAINTENANCE</option>
+        </select>
+        <span class="highlight"></span>
+        <span class="bar"></span>
+      </div>
+
+      <div class="group">
+        <input type="text" v-model="scooter.batteryCharge" required>
+        <span class="highlight"></span>
+        <span class="bar"></span>
+        <label>Battery charge:</label>
+      </div>
+      <div class="group">
+        <input type="text" v-model="scooter.gpsLocation.longitude" required>
+        <span class="highlight"></span>
+        <span class="bar"></span>
+        <label>GPS Location:</label>
+      </div>
+
+      <div class="group">
+        <input type="text"  v-model="scooter.mileage" required>
+        <span class="highlight"></span>
+        <span class="bar"></span>
+        <label>Total Mileage (km):</label>
+      </div>
+    </form>
   </div>
-
-  <button v-on:click="this.newScooter();" class="buttonScooter">New scooter</button>
-
-  <p v-if="this.selected_scooter == null">Select a scooter from the list at the left</p>
-
-  <Detail34 v-else :scooter_d="selected_scooter" @delScooter="this.delScooter()" />
 </template>
 
 <script>
-import Detail34 from "@/components/scooters/Detail34";
-
 export default {
-  name: "DetailOverview34",
-  components: {
-    Detail34
-  },
+  name: "DetailOverview32",
+  props: ['scooter_d'],
 
-  mounted() {
-    // Import random-location module
-    let recaptchaScript = document.createElement('script')
-    recaptchaScript.setAttribute('src', 'https://unpkg.com/random-location/dist/randomLocation.umd.js')
-    document.head.appendChild(recaptchaScript)
+  watch: {
+    scooter_d: function(newVal) {
+      this.scooter = newVal;
+    },
   },
 
   data() {
     return {
-      scooters: [],
-      selected_scooter: null,
+      scooter: this.scooter_d,
     }
   },
-
-  created() {
-    this.importRandLoc()
-
-    this.last_id = 30000;
-    for (let i=0; i<20; i++) {
-      this.scooters.push(Scooter.createSampleScooter(this.nextId()))
-    }
-  },
-
-  methods: {
-    nextId() {
-      return this.last_id + this.scooters.length;
-    },
-
-    importRandLoc() {
-      // Import random-location module
-      let recaptchaScript = document.createElement('script')
-      recaptchaScript.setAttribute('src', 'https://unpkg.com/random-location/dist/randomLocation.umd.js')
-      document.head.appendChild(recaptchaScript)
-    },
-
-    newScooter() {
-      let new_scooter = Scooter.createSampleScooter(this.nextId());
-      this.scooters.push(new_scooter);
-
-      this.selected_scooter = new_scooter;
-
-      // Scroll to bottom
-      setTimeout(f => this.$refs.scroll.scrollTop = this.$refs.scroll.scrollHeight, 100);
-    },
-
-    delScooter() {
-      this.scooters.splice(this.scooters.indexOf(this.selected_scooter), 1);
-      this.selected_scooter = null;
-    },
-
-    onSelect(scooter) {
-      (scooter === this.selected_scooter) ? this.selected_scooter = null : this.selected_scooter = scooter;
-    }
-  }
 }
-
-import Scooter from "@/models/scooter";
 </script>
 
 <style scoped>
-#scooter_ids {
-  position: absolute;
-  max-height: 40%;
-  overflow-y: scroll;
-}
-
-#scooter_ids th {
-  width: 30%;
-}
-
-.scooter_id {
-  cursor: pointer;
-  width: 100%;
-}
-
-.scooter_id:hover {
-  background-color: darkgrey;
-}
-
-.selectID {
-  background-color: darkgrey;
-}
-
-.rwd-table tr {
-  border-top: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
-}
-.rwd-table th {
-  display: none;
-}
-.rwd-table td {
-  display: block;
-}
-.rwd-table td:first-child {
-  padding-top: 0.5em;
-}
-.rwd-table td:last-child {
-  padding-bottom: 0.5em;
-}
-.rwd-table td:before {
-  content: attr(data-th) ": ";
-  font-weight: bold;
-  width: 6.5em;
-  display: inline-block;
-}
-@media (min-width: 480px) {
-  .rwd-table td:before {
-    display: none;
-  }
-}
-.rwd-table th,
-.rwd-table td {
-  text-align: left;
-}
-@media (min-width: 480px) {
-  .rwd-table th,
-  .rwd-table td {
-    display: table-cell;
-    padding: 0.25em 0.5em;
-  }
-  .rwd-table th:first-child,
-  .rwd-table td:first-child {
-    padding-left: 0;
-  }
-  .rwd-table th:last-child,
-  .rwd-table td:last-child {
-    padding-right: 0;
-  }
-}
-
-body {
-  padding: 0 2em;
-  font-family: Montserrat, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-  color: #444;
-  background: #eee;
-}
-
-h1 {
-  font-weight: normal;
-  letter-spacing: -1px;
-  color: #34495e;
-}
-
-.rwd-table {
-  background: #34495e;
-  color: #fff;
-  border-radius: 0.4em;
-  overflow: hidden;
-  margin: 8%;
-  width: 80%;
-}
-.rwd-table tr {
-  border-color: #46637f;
-}
-.rwd-table th,
-.rwd-table td {
-  margin: 0.5em 1em;
-}
-@media (min-width: 480px) {
-  .rwd-table th,
-  .rwd-table td {
-    padding: 1em !important;
-  }
-}
-.rwd-table th,
-.rwd-table td:before {
-  color: #dd5;
-}
-
-table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
-
 td, th {
-  border: 1px solid #46637f;
+  border: 1px solid #dddddd;
   text-align: left;
   padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+#detail_labels tr {
+  text-align: right;
+}
+
+
+
+.group 			  {
+  position:relative;
+  margin-bottom:45px;
+}
+input 				{
+  font-size:18px;
+  padding:10px 10px 10px 5px;
+  display:block;
+  width:300px;
+  border:none;
+  border-bottom:1px solid #757575;
+}
+input:focus 		{ outline:none; }
+
+/* LABEL ======================================= */
+label 				 {
+  color:#999;
+  font-size:18px;
+  font-weight:normal;
+  position:absolute;
+  pointer-events:none;
+  left:5px;
+  top:10px;
+  transition:0.2s ease all;
+  -moz-transition:0.2s ease all;
+  -webkit-transition:0.2s ease all;
+}
+
+/* active state */
+input:focus ~ label, input:valid ~ label 		{
+  top:-20px;
+  font-size:14px;
+  color:#5264AE;
+}
+
+/* BOTTOM BARS ================================= */
+.bar 	{ position:relative; display:block; width:300px; }
+.bar:before, .bar:after 	{
+  content:'';
+  height:2px;
+  width:0;
+  bottom:1px;
+  position:absolute;
+  background:#5264AE;
+  transition:0.2s ease all;
+  -moz-transition:0.2s ease all;
+  -webkit-transition:0.2s ease all;
+}
+.bar:before {
+  left:50%;
+}
+.bar:after {
+  right:50%;
+}
+
+/* active state */
+input:focus ~ .bar:before, input:focus ~ .bar:after {
+  width:50%;
+}
+
+/* HIGHLIGHTER ================================== */
+.highlight {
+  position:absolute;
+  height:60%;
+  width:100px;
+  top:25%;
+  left:0;
+  pointer-events:none;
+  opacity:0.5;
+}
+
+input:focus ~ .highlight {
+  -webkit-animation:inputHighlighter 0.3s ease;
+  -moz-animation:inputHighlighter 0.3s ease;
+  animation:inputHighlighter 0.3s ease;
+}
+
+@-webkit-keyframes inputHighlighter {
+  from { background:#5264AE; }
+  to 	{ width:0; background:transparent; }
+}
+@-moz-keyframes inputHighlighter {
+  from { background:#5264AE; }
+  to 	{ width:0; background:transparent; }
+}
+@keyframes inputHighlighter {
+  from { background:#5264AE; }
+  to 	{ width:0; background:transparent; }
 }
 
 .buttonScooter{
@@ -228,12 +184,24 @@ td, th {
 }
 
 
+@media (min-width: 1200px){
+  .container {
+    width: 320px;
+    margin-top: 62px;
+  }
+}
+
 @media only screen and (max-width: 600px) {
-  #scooter_ids {
+  #scooter_ids{
     position: absolute;
     max-height: 23%;
     margin-top: 162px;
   }
-}
 
+
+  .container {
+    width: 320px;
+    margin-top: 337px;
+  }
+}
 </style>

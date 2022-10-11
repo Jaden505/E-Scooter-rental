@@ -18,16 +18,16 @@
 
   <p v-if="this.selected_scooter == null">Select a scooter from the list at the left</p>
 
-  <Detail32 v-else :scooter_d="selected_scooter" @delScooter="this.delScooter()" />
+  <Detail34 v-else :scooter_d="selected_scooter" @delScooter="this.delScooter()" />
 </template>
 
 <script>
-import Detail32 from "@/components/scooters/Detail32";
+import Detail34 from "@/components/scooters/Detail34";
 
 export default {
   name: "OverView34",
   components: {
-    Detail32
+    Detail34
   },
 
   watch: {
@@ -92,7 +92,7 @@ export default {
       }
       else if (this.selected_scooter != null) {
         this.selected_scooter = null;
-        this.$router.push("/scooters/overview33")
+        this.$router.push("/scooters/overview34")
       }
     },
 

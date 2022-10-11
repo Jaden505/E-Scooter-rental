@@ -1,6 +1,4 @@
 <template>
-
-
   <button v-on:click="$emit('delScooter')" class="buttonScooter">Delete scooter</button>
   <div class="container">
     <form>
@@ -51,7 +49,7 @@ export default {
   props: ['scooter_d'],
 
   watch: {
-    scooter: function(newVal) {
+    scooter_d: function(newVal) {
       this.scooter = newVal;
     },
   },
