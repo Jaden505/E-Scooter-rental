@@ -24,6 +24,15 @@ class Scooter {
 
         return new Scooter(id, tag, status, gpsLocation, mileage, batteryCharge);
     }
+
+
+    static copyConstructer (scooter){
+        if (scooter === null || scooter == undefined){
+            return null
+        } else {
+            return Object.assign(new Scooter(0),scooter)
+        }
+    }
 }
 
 export default Scooter;

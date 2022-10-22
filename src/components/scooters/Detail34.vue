@@ -1,5 +1,10 @@
 <template>
+
   <button v-on:click="$emit('delScooter')" class="buttonScooter">Delete scooter</button>
+  <button class="buttonScooter" v-show="true" :disabled="enablevalue" @click="onSave">Save</button>
+  <button class="buttonScooter" v-show="true" @click="onCancel">Cancel</button>
+  <button class="buttonScooter " v-show="true" :disabled="enablevalue" @click="onReset">Reset</button>
+
   <div class="container">
     <form>
       <div class="group">
@@ -44,21 +49,69 @@
 </template>
 
 <script>
+import Scooter from "@/models/scooter";
+
 export default {
-  name: "DetailOverview32",
+  name: "DetailOverview34",
   props: ['scooter_d'],
 
+  created(){
+    this.copy = Scooter.copyConstructer(this.scooter_d)
+    this.enablevalue = false
+  },
+
   watch: {
-    scooter_d: function(newVal) {
+    scooter: function(newVal) {
       this.scooter = newVal;
-    },
+    }
   },
 
   data() {
     return {
       scooter: this.scooter_d,
+      copy: '',
+      enablevalue: false,
     }
   },
+
+  methods: {
+
+    onClear(){
+      if (this.saved == false){
+        this.onReset()
+      }
+      this.scooter.tag = ' '
+      this.scooter.batteryCharge = ' '
+      this.scooter.gpsLocation.longitude = ' '
+      this.scooter.mileage = ' '
+      this.enablevalue = true
+    },
+
+    onReset(){
+      this.scooter.tag = this.copy.tag
+      this.scooter.batteryCharge = this.copy.batteryCharge
+      this.scooter.gpsLocation.longitude = this.copy.gpsLocation
+      this.scooter.mileage = this.copy.mileage
+      this.enablevalue = true
+
+
+    },
+
+    onCancel (){
+      if (this.saved === false){
+        this.onReset()
+      }
+      this.$emit("deselect_scooter")
+      // this.$router.push(this.)
+    },
+
+    onSave(){
+      this.saved = true
+      this.onCancel()
+    }
+    //
+    // this.$router.push(this.$route.matched[0].path)
+  }
 }
 </script>
 
