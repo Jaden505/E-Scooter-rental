@@ -2,7 +2,7 @@
 
   <button v-on:click="$emit('delScooter')" class="buttonScooter">Delete scooter</button>
   <button class="buttonScooter" v-show="true" :disabled="enablevalue" @click="onSave">Save</button>
-  <button class="buttonScooter" v-show="true" @click="onCancel">Cancel</button>
+  <button class="buttonScooter"  v-show="true" @click="onCancel">Cancel</button>
   <button class="buttonScooter " v-show="true" :disabled="enablevalue" @click="onReset">Reset</button>
 
   <div class="container">
@@ -51,6 +51,7 @@
 <script>
 import Scooter from "@/models/scooter";
 
+
 export default {
   name: "DetailOverview34",
   props: ['scooter_d'],
@@ -75,7 +76,6 @@ export default {
   },
 
   methods: {
-
     onClear(){
       if (this.saved == false){
         this.onReset()
@@ -101,21 +101,29 @@ export default {
       if (this.saved === false){
         this.onReset()
       }
-      this.$emit("deselect_scooter")
-      // this.$router.push(this.)
+      this.$router.push({path : "/scooters/overview34"});
     },
 
     onSave(){
       this.saved = true
       this.onCancel()
-    }
-    //
+    },
     // this.$router.push(this.$route.matched[0].path)
   }
 }
 </script>
 
 <style scoped>
+
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
+
 td, th {
   border: 1px solid #dddddd;
   text-align: left;
