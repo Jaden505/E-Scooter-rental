@@ -7,4 +7,10 @@ import java.util.List;
 @Repository
 public interface ScooterRepository {
     List<Scooter> findAll();
+
+    Scooter findById(long id);
+
+    Scooter save(Scooter scooter);
+
+    Scooter deleteById(long id);
 }
