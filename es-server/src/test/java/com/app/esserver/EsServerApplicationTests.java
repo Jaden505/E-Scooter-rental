@@ -1,4 +1,4 @@
-package com.example.esserver;
+package com.app.esserver;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,7 +1,7 @@
-package app.models;
+package com.app.esserver.models;
 
 import java.util.ArrayList;
-
+import java.util.Random;
 public class Scooter {
 
     private long id;
@@ -33,27 +33,24 @@ public class Scooter {
     }
 
     public static Scooter creatSampleScooter(long id){
-    Scooter scooter = new Scooter(id);
+        Random random = new Random();
+        Scooter scooter = new Scooter(id);
 
-    ArrayList<Scooter> scootersSamples = new ArrayList<>();
-    Scooter sample1 = new Scooter(0,"qewdq-qw","INLDE","4324321113232424",100,0.0);
-    Scooter sample2 = new Scooter(1,"dsdwq-qw","INLDE","43243232424",50,0.0);
-    Scooter sample3 = new Scooter(2,"jhjytj-qw","INLDE","542424",20,0.0);
-    Scooter sample4 = new Scooter(3,"eqewq-few","INLDE","5443543",80,0.0);
-    Scooter sample5 = new Scooter(4,"fqwe-qw","INLDE","7675576",20,0.0);
-    Scooter sample6 = new Scooter(5,"u76-qw","INLDE","2432",90,0.0);
-    Scooter sample7 = new Scooter(6,"e112e-qw","INLDE","677",44,0.0);
+        scooter.setId(id);
 
-    scootersSamples.add(sample1);
-    scootersSamples.add(sample2);
-    scootersSamples.add(sample3);
-    scootersSamples.add(sample4);
-    scootersSamples.add(sample5);
-    scootersSamples.add(sample6);
-    scootersSamples.add(sample7);
+        String[] state = {"IDLE", "ACTIVE", "MAINTENANCE"};
+        scooter.setStatus(state[random.nextInt(state.length)]);
 
-        return null;
-}
+        scooter.setBatteryCharge(random.nextInt(100)); 
+
+        scooter.setMileage(random.nextInt(500000));
+
+        scooter.setGpsLocation(Integer.toString(random.nextInt(500000)) + ", " + Integer.toString(random.nextInt(500000)));
+
+        scooter.setTag(Long.toHexString(Double.doubleToLongBits(Math.random())));
+
+        return scooter;
+    }
     public long getId() {
         return id;
     }
@@ -102,3 +99,4 @@ public class Scooter {
         this.mileage = mileage;
     }
 }
+
