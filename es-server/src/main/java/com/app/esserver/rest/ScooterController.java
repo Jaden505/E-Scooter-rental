@@ -40,6 +40,8 @@ public class ScooterController {
     public void createUser(@RequestBody Scooter scooter){
         Scooter saveScooter = scooterRepo.save(scooter);
 
+        //Created
+        // /user/{id}  savedUser.getId()
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
