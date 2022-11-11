@@ -2,12 +2,12 @@ import randomLocation from 'random-location'
 
 class Scooter {
     constructor(id, tag, status, gpsLocation, mileage, batteryCharge) {
-        this.id = id;
-        this.tag = tag;
-        this.status = status;
-        this.gpsLocation = gpsLocation;
-        this.mileage = mileage;
-        this.batteryCharge = batteryCharge;
+        this._id = id;
+        this._tag = tag;
+        this._status = status;
+        this._gpsLocation = gpsLocation;
+        this._mileage = mileage;
+        this._batteryCharge = batteryCharge;
     }
 
     static createSampleScooter(pId = 0) {
@@ -32,6 +32,54 @@ class Scooter {
         } else {
             return Object.assign(new Scooter(0),scooter)
         }
+    }
+
+    get id() {
+        return this._id;
+    }
+
+    set id(value) {
+        this._id = value;
+    }
+
+    get tag() {
+        return this._tag;
+    }
+
+    set tag(value) {
+        this._tag = value;
+    }
+
+    get status() {
+        return this._status;
+    }
+
+    set status(value) {
+        this._status = value;
+    }
+
+    get gpsLocation() {
+        return this._gpsLocation;
+    }
+
+    set gpsLocation(value) {
+        this._gpsLocation = value;
+    }
+
+    get mileage() {
+        return this._mileage;
+    }
+
+    set mileage(value) {
+        this._mileage = value;
+    }
+
+    get batteryCharge() {
+        return this._batteryCharge;
+    }
+
+    set batteryCharge(value) {
+        this._batteryCharge = value;
     }
 }
 
