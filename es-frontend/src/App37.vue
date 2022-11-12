@@ -7,6 +7,9 @@
 
 import NavBar from "@/components/NavBar";
 import HeaderComp from "@/components/Header";
+import Scooter from "@/models/scooter";
+const BACKEND_URL  = "http://localhost:8085"
+
 
 export default {
   name: 'App',
@@ -14,6 +17,11 @@ export default {
     NavBar,
     HeaderComp,
   },
+  provide(){
+    return{
+      scooterService: new ScooterAdaptor(BACKEND_URL + "/scooters", Scooter.copyConstructer())
+    }
+  }
 }
 </script>
 

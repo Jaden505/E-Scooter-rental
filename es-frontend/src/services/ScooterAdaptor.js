@@ -33,20 +33,13 @@ export class ScooterAdaptor{
 
     async asyncSave(scooter){
         console.log('ScooterAdaptor .asyncFindbyId()...');
-        const scooters = await this.fetchJson(this.resourcesUrl);
-        if (scooter.getId() == 0) {
-            scooter.setId(scooterCount++);
-        }
-        scooters.add(scooter);
-        return scooter;
+        const scooterReturned = await this.fetchJson(this.resourcesUrl + "/" + scooter.id , 'PUT', scooter);
+        return Scooter.copyConstructer(scooterReturned)
     }
 
     async asyncDeleteById(id){
-        console.log('ScooterAdaptor .asyncDeleteById()...');
-        if (!scooter.equals(null)) {
-            scooters.remove(scooter);
-        }
-        return scooter;
+        console.log('ScooterAdaptor .asyncFindbyId()...');
+        return await this.fetchJson(this.resourcesUrl + "/" + id, 'DELETE');
     }
 
 }
