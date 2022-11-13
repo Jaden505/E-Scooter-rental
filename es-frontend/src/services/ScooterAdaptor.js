@@ -8,16 +8,14 @@ export class ScooterAdaptor{
     }
 
     async fetchJson(URL, options = null){
-        let response = await fetch(url,options)
+        let response = await fetch(URL,options)
         if (response.ok) {
             return await response.json();
         } else {
-
             console.log(response, !response.bodyUsed ? await response.text() : "");
             return null;
         }
     }
-
     async asyncFindALL() {
         console.log('ScooterAdaptor .asyncFindAll()...');
         const scooters = await this.fetchJson(this.resourcesUrl);
@@ -30,7 +28,6 @@ export class ScooterAdaptor{
         return scooters?.stream().filter(scooter => scooter.getById == id).findFirst().orElse(null);
 
     }
-
     async asyncSave(scooter){
         console.log('ScooterAdaptor .asyncFindbyId()...');
         const scooterReturned = await this.fetchJson(this.resourcesUrl + "/" + scooter.id , 'PUT', scooter);
@@ -41,5 +38,13 @@ export class ScooterAdaptor{
         console.log('ScooterAdaptor .asyncFindbyId()...');
         return await this.fetchJson(this.resourcesUrl + "/" + id, 'DELETE');
     }
+
+    async createScooter(){
+        const scooter = await this.fetchJson(this.resourceUrl , 'POST');
+        return Scooter.copyConstructer(scooter)
+    }
+
+
+
 
 }

@@ -8,8 +8,8 @@
 import NavBar from "@/components/NavBar";
 import HeaderComp from "@/components/Header";
 import Scooter from "@/models/scooter";
+import {ScooterAdaptor} from "@/services/ScooterAdaptor";
 const BACKEND_URL  = "http://localhost:8085"
-
 
 export default {
   name: 'App',

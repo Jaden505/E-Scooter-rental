@@ -54,6 +54,7 @@ import Scooter from "@/models/scooter";
 
 export default {
   name: "DetailOverview37",
+  inject:["ScooterService"],
   props: ['scooter_d'],
 
   created(){

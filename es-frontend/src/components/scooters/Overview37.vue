@@ -23,46 +23,40 @@
 
 <script>
 import Detail37 from "@/components/scooters/Detail37";
+import {ScooterAdaptor} from "@/services/ScooterAdaptor";
 
 export default {
   name: "OverView37",
+  inject:["scooterService"],
   components: {
     Detail37
   },
-
   watch: {
     '$route'() {
       this.selected_scooter = this.findSelectedFromRouteParam();
     }
   },
-
   mounted() {
     // Import random-location module
     let recaptchaScript = document.createElement('script')
     recaptchaScript.setAttribute('src', 'https://unpkg.com/random-location/dist/randomLocation.umd.js')
     document.head.appendChild(recaptchaScript)
   },
-
   data() {
     return {
       scooters: [],
       selected_scooter: null,
     }
   },
-
-  created() {
-    this.importRandLoc()
-
-    this.last_id = 30000;
-    for (let i=0; i<20; i++) {
-      this.scooters.push(Scooter.createSampleScooter(this.nextId()))
-    }
+  async created() {
+    this.scooter = await this.scooterService.asyncFindALL();
+    this.selected_scooter = this.findSelectedFromRouteParam(this.$route);
   },
-
   methods: {
     nextId() {
       return this.last_id + this.scooters.length;
     },
+
 
     importRandLoc() {
       // Import random-location module
@@ -70,15 +64,14 @@ export default {
       recaptchaScript.setAttribute('src', 'https://unpkg.com/random-location/dist/randomLocation.umd.js')
       document.head.appendChild(recaptchaScript)
     },
-
-    newScooter() {
-      let new_scooter = Scooter.createSampleScooter(this.nextId());
+    async newScooter() {
+      const new_scooter = await this.scooterService.createScooter();
       this.scooters.push(new_scooter);
-
       this.selected_scooter = new_scooter;
-
       // Scroll to bottom
       setTimeout(f => this.$refs.scroll.scrollTop = this.$refs.scroll.scrollHeight, 100);
+
+
     },
 
     delScooter() {
@@ -98,7 +91,6 @@ export default {
 
     findSelectedFromRouteParam() {
       let id = this.$route.params.id;
-
       return this.scooters.find(function (scooter) {
         if (id == scooter.id) {return scooter;}
       })

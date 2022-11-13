@@ -52,7 +52,6 @@ export default {
 
   created() {
     this.importRandLoc()
-
     this.last_id = 30000;
     for (let i=0; i<20; i++) {
       this.scooters.push(Scooter.createSampleScooter(this.nextId()))
@@ -98,7 +97,6 @@ export default {
 
     findSelectedFromRouteParam() {
       let id = this.$route.params.id;
-
       return this.scooters.find(function (scooter) {
         if (id == scooter.id) {return scooter;}
       })
