@@ -32,7 +32,7 @@
         <label>Battery charge:</label>
       </div>
       <div class="group">
-        <input type="text" v-model="scooter.gpsLocation.longitude" required>
+        <input type="text" v-model="scooter.gpsLocation" required>
         <span class="highlight"></span>
         <span class="bar"></span>
         <label>GPS Location:</label>
@@ -54,7 +54,7 @@ import Scooter from "@/models/scooter";
 
 export default {
   name: "DetailOverview37",
-  inject:["ScooterService"],
+  inject:["scooterService"],
   props: ['scooter_d'],
 
   created(){
@@ -78,7 +78,7 @@ export default {
 
   methods: {
     onClear(){
-      if (this.saved == false){
+      if (this.saved === false){
         this.onReset()
       }
       this.scooter.tag = ' '
@@ -103,11 +103,11 @@ export default {
       this.$router.push({path : "/scooters/overview37"});
     },
 
-    onSave(){
-      this.saved = true
-      this.onCancel()
+    async onSave(){
+      this.saved = true;
+      await this.scooterService.asyncSave(this.scooter);
+      this.onCancel();
     },
-    // this.$router.push(this.$route.matched[0].path)
   }
 }
 </script>
@@ -136,8 +136,6 @@ tr:nth-child(even) {
 #detail_labels tr {
   text-align: right;
 }
-
-
 
 .group 			  {
   position:relative;

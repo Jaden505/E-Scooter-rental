@@ -3,6 +3,8 @@ package com.app.esserver.rest;
 import com.app.esserver.models.Scooter;
 import com.app.esserver.repositories.ScooterRepositoryMock;
 
+import org.springframework.boot.configurationprocessor.json.JSONException;
+import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
@@ -30,19 +32,20 @@ public class ScooterController {
 //    @PostMapping("/")
     @PutMapping("/")
     @ResponseBody
-    public Scooter saveScooter(@RequestBody Scooter scooter){
+    public Scooter saveScooter(@RequestBody String scooter_json) throws JSONException {
+        Scooter scooter = new Scooter();
+
+        JSONObject scooter_details = new JSONObject(scooter_json).getJSONObject("scooter");
+        scooter.setId(scooter_details.getLong("_id"));
+        scooter.setTag(scooter_details.getString("_tag"));
+        scooter.setStatus(scooter_details.getString("_status"));
+        scooter.setGpsLocation(scooter_details.getString("_gpsLocation"));
+        scooter.setMileage(scooter_details.getInt("_mileage"));
+        scooter.setBatteryCharge(scooter_details.getInt("_batteryCharge"));
+
         Scooter saveScooter = scooterRepo.save(scooter);
 
-        return saveScooter;
-
-//        //Created
-//        // /user/{id}  savedUser.getId()
-//        URI location = ServletUriComponentsBuilder
-//                .fromCurrentRequest()
-//                .path("/{id}")
-//                .buildAndExpand(saveScooter.getId()).toUri();
-//
-//        ResponseEntity.created(location).build();
+        return scooter;
     }
 
     @DeleteMapping("/{id}")

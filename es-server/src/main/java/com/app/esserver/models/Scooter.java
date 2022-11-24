@@ -2,8 +2,8 @@ package com.app.esserver.models;
 
 import java.util.ArrayList;
 import java.util.Random;
-public class Scooter {
 
+public class Scooter {
     private long id;
     private String tag;
     private String status;
@@ -30,6 +30,9 @@ public class Scooter {
     }
 
     public Scooter(long id) {
+    }
+
+    public Scooter() {
     }
 
     public static Scooter creatSampleScooter(long id){

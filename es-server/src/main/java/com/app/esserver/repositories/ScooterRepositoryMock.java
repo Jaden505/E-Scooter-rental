@@ -8,7 +8,7 @@ import com.app.esserver.models.Scooter;
 import java.util.ArrayList;
 import java.util.Random;
 public class ScooterRepositoryMock implements ScooterRepository {
-    ArrayList<Scooter> scooters = new ArrayList<>();
+    List<Scooter> scooters = new ArrayList<>();
 
     private static int scooterCount = 3007;
 
@@ -17,7 +17,6 @@ public class ScooterRepositoryMock implements ScooterRepository {
         for (int i=3000; i< 3008; i++) {
             scooters.add(Scooter.creatSampleScooter(i));
         }
-
 
         return scooters;
     }
@@ -28,26 +27,17 @@ public class ScooterRepositoryMock implements ScooterRepository {
 
     public Scooter save(@RequestBody Scooter scooter) {
         // Generate id if not set
-
         if (scooter.getId() == 0) {
             scooter.setId(scooterCount++);
+            scooters.add(scooter);
         }
-        scooters.add(scooter);
-        return scooter;
-//
-//        if (scooter.getId() == 0) {
-//            scooter.setId(new Random().nextInt(99999));
-//        }
-//
-//        Scooter scooter_found = findById(scooter.getId());
-//
-//        if (scooter_found == null) {
-//            scooters.add(scooter);
-//        }
-//        else {
-//            scooters.set(scooters.indexOf(scooter_found), scooter);
-//        }
+        else {
+            Scooter old_scooter = scooters.stream().filter(s -> s.getId() == (scooter.getId())).findFirst().get();
 
+            this.scooters.set(scooters.indexOf(old_scooter), scooter);
+        }
+
+        return scooter;
     }
 
     public Scooter deleteById(long id) {

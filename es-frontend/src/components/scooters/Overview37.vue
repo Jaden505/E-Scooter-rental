@@ -18,7 +18,7 @@
 
   <p v-if="this.selected_scooter == null">Select a scooter from the list at the left</p>
 
-  <Detail37 v-else :key="selected_scooter" :scooter_d="selected_scooter" @delScooter="this.delScooter()" />
+  <Detail37 v-else :key="this.selected_scooter" :scooter_d="this.selected_scooter" @delScooter="this.delScooter()" />
 </template>
 
 <script>
@@ -40,7 +40,6 @@ export default {
 
   async created() {
     this.scooters = await this.scooterService.asyncFindALL();
-    this.selected_scooter = this.findSelectedFromRouteParam(this.$route);
   },
 
   methods: {
@@ -68,7 +67,7 @@ export default {
     onSelect(scooter) {
       if (scooter === this.selected_scooter) {
         this.selected_scooter = null;
-        this.$router.push("/scooters/overview34")
+        this.$router.push("/scooters/overview37")
       }
       else {
         this.selected_scooter = scooter;
