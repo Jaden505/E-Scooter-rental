@@ -18,7 +18,7 @@
 
   <p v-if="this.selected_scooter == null">Select a scooter from the list at the left</p>
 
-  <Detail34 v-else :scooter_d="selected_scooter" @delScooter="this.delScooter()" />
+  <Detail34 v-else :key="this.selected_scooter" :scooter_d="this.selected_scooter" @delScooter="this.delScooter()" />
 </template>
 
 <script>
@@ -30,17 +30,8 @@ export default {
     Detail34
   },
 
-  watch: {
-    '$route'() {
-      this.selected_scooter = this.findSelectedFromRouteParam();
-    }
-  },
-
   mounted() {
-    // Import random-location module
-    let recaptchaScript = document.createElement('script')
-    recaptchaScript.setAttribute('src', 'https://unpkg.com/random-location/dist/randomLocation.umd.js')
-    document.head.appendChild(recaptchaScript)
+    this.importRandLoc();
   },
 
   data() {
@@ -51,7 +42,6 @@ export default {
   },
 
   created() {
-    this.importRandLoc()
     this.last_id = 30000;
     for (let i=0; i<20; i++) {
       this.scooters.push(Scooter.createSampleScooter(this.nextId()))
@@ -86,21 +76,15 @@ export default {
     },
 
     onSelect(scooter) {
-      if (scooter != null && scooter !== this.selected_scooter) {
-        this.$router.push(this.$route.matched[0].path + "/" + scooter.id);
-      }
-      else if (this.selected_scooter != null) {
+      if (scooter === this.selected_scooter) {
         this.selected_scooter = null;
         this.$router.push("/scooters/overview34")
       }
+      else {
+        this.selected_scooter = scooter;
+        this.$router.push(this.$route.matched[0].path + "/" + scooter.id);
+      }
     },
-
-    findSelectedFromRouteParam() {
-      let id = this.$route.params.id;
-      return this.scooters.find(function (scooter) {
-        if (id == scooter.id) {return scooter;}
-      })
-    }
   }
 }
 
