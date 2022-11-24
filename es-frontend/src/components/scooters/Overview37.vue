@@ -23,7 +23,6 @@
 
 <script>
 import Detail37 from "@/components/scooters/Detail37";
-import {ScooterAdaptor} from "@/services/ScooterAdaptor";
 
 export default {
   name: "OverView37",
@@ -31,51 +30,44 @@ export default {
   components: {
     Detail37
   },
+
   watch: {
     '$route'() {
       this.selected_scooter = this.findSelectedFromRouteParam();
     }
   },
-  mounted() {
-    // Import random-location module
-    let recaptchaScript = document.createElement('script')
-    recaptchaScript.setAttribute('src', 'https://unpkg.com/random-location/dist/randomLocation.umd.js')
-    document.head.appendChild(recaptchaScript)
-  },
+
   data() {
     return {
       scooters: [],
       selected_scooter: null,
     }
   },
+
   async created() {
-    this.scooter = await this.scooterService.asyncFindALL();
+    this.scooters = await this.scooterService.asyncFindALL();
     this.selected_scooter = this.findSelectedFromRouteParam(this.$route);
   },
+
   methods: {
     nextId() {
       return this.last_id + this.scooters.length;
     },
 
-
-    importRandLoc() {
-      // Import random-location module
-      let recaptchaScript = document.createElement('script')
-      recaptchaScript.setAttribute('src', 'https://unpkg.com/random-location/dist/randomLocation.umd.js')
-      document.head.appendChild(recaptchaScript)
-    },
     async newScooter() {
-      const new_scooter = await this.scooterService.createScooter();
+      const new_scooter = await this.scooterService.asyncSave(new Scooter(0));
       this.scooters.push(new_scooter);
       this.selected_scooter = new_scooter;
+
       // Scroll to bottom
       setTimeout(f => this.$refs.scroll.scrollTop = this.$refs.scroll.scrollHeight, 100);
-
-
     },
 
-    delScooter() {
-      this.scooters.splice(this.scooters.indexOf(this.selected_scooter), 1);
+    async delScooter() {
+      let scooter_index = this.scooters.indexOf(this.selected_scooter);
+      this.scooters.splice(scooter_index, 1);
+      await this.scooterService.asyncDeleteById(this.selected_scooter.id);
+
       this.selected_scooter = null;
     },
 
@@ -85,7 +77,7 @@ export default {
       }
       else if (this.selected_scooter != null) {
         this.selected_scooter = null;
-        this.$router.push("/scooters/overview34")
+        this.$router.push("/scooters/overview37")
       }
     },
 

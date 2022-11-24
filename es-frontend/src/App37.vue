@@ -19,7 +19,7 @@ export default {
   },
   provide(){
     return{
-      scooterService: new ScooterAdaptor(BACKEND_URL + "/scooters", Scooter.copyConstructer())
+      scooterService: new ScooterAdaptor(BACKEND_URL + "/scooters/", Scooter.copyConstructer())
     }
   }
 }

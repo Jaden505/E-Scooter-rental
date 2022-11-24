@@ -94,15 +94,13 @@ export default {
       this.scooter.gpsLocation.longitude = this.copy.gpsLocation
       this.scooter.mileage = this.copy.mileage
       this.enablevalue = true
-
-
     },
 
     onCancel (){
       if (this.saved === false){
         this.onReset()
       }
-      this.$router.push({path : "/scooters/overview34"});
+      this.$router.push({path : "/scooters/overview37"});
     },
 
     onSave(){
