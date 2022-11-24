@@ -5,7 +5,7 @@
   <button class="buttonScooter"  v-show="true" @click="onCancel">Cancel</button>
   <button class="buttonScooter " v-show="true" :disabled="enablevalue" @click="onReset">Reset</button>
 
-  <div class="container">
+  <div class="container" v-if="scooter">
     <form>
       <div class="group">
         <input type="text" v-model="scooter.tag" required>
@@ -39,7 +39,7 @@
       </div>
 
       <div class="group">
-        <input type="text"  v-model="scooter.mileage" required>
+        <input type="text" v-model="scooter.mileage" required>
         <span class="highlight"></span>
         <span class="bar"></span>
         <label>Total Mileage (km):</label>
@@ -51,29 +51,26 @@
 <script>
 import Scooter from "@/models/scooter";
 
-
 export default {
   name: "DetailOverview37",
   inject:["scooterService"],
-  props: ['scooter_d'],
-
-  created(){
-    this.copy = Scooter.copyConstructer(this.scooter_d)
-    this.enablevalue = false
-  },
-
-  watch: {
-    scooter: function(newVal) {
-      this.scooter = newVal;
-    }
-  },
 
   data() {
     return {
-      scooter: this.scooter_d,
+      scooter: null,
       copy: '',
       enablevalue: false,
+      scooters: []
     }
+  },
+
+  async mounted() {
+    await this.findSelectedFromRouteParam();
+  },
+
+  created(){
+    this.copy = Scooter.copyConstructer(this.scooter);
+    this.enablevalue = false;
   },
 
   methods: {
@@ -108,6 +105,17 @@ export default {
       await this.scooterService.asyncSave(this.scooter);
       this.onCancel();
     },
+
+    async findSelectedFromRouteParam() {
+      this.scooters = await this.scooterService.asyncFindALL();
+      let id = this.$route.params.id;
+
+      await this.scooters.find(s => {
+        if (id == s.id) {
+          this.scooter = s;
+        }
+      })
+    }
   }
 }
 </script>

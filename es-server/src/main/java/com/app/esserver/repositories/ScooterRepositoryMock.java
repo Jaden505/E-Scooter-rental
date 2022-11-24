@@ -14,6 +14,8 @@ public class ScooterRepositoryMock implements ScooterRepository {
 
 
     public List<Scooter> findAll() {
+        if (scooters.size() > 0) {return scooters;}
+
         for (int i=3000; i< 3008; i++) {
             scooters.add(Scooter.creatSampleScooter(i));
         }
