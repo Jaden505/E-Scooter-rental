@@ -57,10 +57,10 @@ export default {
     },
 
     async delScooter() {
-      let scooter_index = this.scooters.indexOf(this.selected_scooter);
-      this.scooters.splice(scooter_index, 1);
       await this.scooterService.asyncDeleteById(this.selected_scooter.id);
 
+      let scooter_index = this.scooters.indexOf(this.selected_scooter);
+      this.scooters.splice(scooter_index, 1);
       this.selected_scooter = null;
     },
 

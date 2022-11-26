@@ -49,7 +49,8 @@ public class ScooterController {
     }
 
     @DeleteMapping("/{id}")
-    public Scooter deleteById(@PathVariable long id) {
+    public Scooter deleteById(@PathVariable String id_json) throws JSONException {
+        Long id = new JSONObject(id_json).getLong("_id");
         return scooterRepo.deleteById(id);
     }
 }

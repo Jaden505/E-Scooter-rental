@@ -98,6 +98,7 @@ export default {
         this.onReset()
       }
       this.$router.push({path : "/scooters/overview37"});
+      window.location.reload();
     },
 
     async onSave(){

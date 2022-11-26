@@ -37,6 +37,7 @@ export class ScooterAdaptor{
 
     async asyncDeleteById(id){
         console.log('ScooterAdaptor .asyncDeleteByID()...');
-        return await this.fetchJson(this.resourcesUrl + id, 'DELETE');
+        return await this.fetchJson(this.resourcesUrl + id, {method: 'DELETE', body: JSON.stringify(
+                {id: id}), headers: {'Content-type': 'application/json; charset=UTF-8'}});
     }
 }
