@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Scooter {
+
     private long id;
     private String tag;
     private String status;
