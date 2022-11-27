@@ -1,6 +1,6 @@
 <template>
     <div class="topnav">
-      <a><router-link to="/">HOME</router-link></a>
+      <router-link to="/">HOME</router-link>
 
       <div class="dropdown">
         <button class="dropbtn">SCOOTERS</button>
@@ -10,6 +10,7 @@
           <a><router-link to="/scooters/overview33">Scooters edit (router)</router-link></a>
           <a><router-link to="/scooters/overview34">Scooters edit (managed)</router-link></a>
           <a><router-link to="/scooters/overview34">Scooters edit (guarded)</router-link></a>
+          <a><router-link to="/scooters/overview37">Scooters edit (REST-backend)</router-link></a>
         </div>
       </div>
 
@@ -52,7 +53,8 @@ export default {
 
   /* Dropdown Button */
   .dropbtn {
-    background-color: #04AA6D;
+    float: left;
+    background-color: #333;
     color: white;
     padding: 16px;
     font-size: 16px;
@@ -90,6 +92,6 @@ export default {
   .dropdown:hover .dropdown-content {display: block;}
 
   /* Change the background color of the dropdown button when the dropdown content is shown */
-  .dropdown:hover .dropbtn {background-color: #3e8e41;}
+  .dropdown:hover .dropbtn {background-color: #ddd; color: black;}
 
 </style>
