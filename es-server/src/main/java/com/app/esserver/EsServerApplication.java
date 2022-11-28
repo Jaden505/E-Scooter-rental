@@ -9,7 +9,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @SpringBootApplication
 public class EsServerApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(EsServerApplication.class, args);
     }
