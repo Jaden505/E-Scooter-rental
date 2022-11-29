@@ -1,10 +1,20 @@
 package com.app.esserver.models;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import java.util.ArrayList;
 import java.util.Random;
 
+@Entity
+@NamedQuery(name = "select_all", query = "select p from Scooter p")
 public class Scooter {
 
+    @Id
+    @GeneratedValue
     private long id;
     private String tag;
     private String status;
@@ -58,6 +68,8 @@ public class Scooter {
     public long getId() {
         return id;
     }
+
+
 
     public void setId(long id) {
         this.id = id;

@@ -51,4 +51,6 @@ public class ScooterRepositoryMock implements ScooterRepository {
 
         return scooter;
     }
+
+
 }
