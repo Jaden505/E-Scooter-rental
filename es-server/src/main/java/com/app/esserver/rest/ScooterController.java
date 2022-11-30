@@ -32,12 +32,14 @@ public class ScooterController {
     }
 
     @GetMapping("/{id}")
-    public Scooter findById(@PathVariable long id) {
-        Scooter scooter = scooterRepo.findById(id);
-        if (scooter == null) {
+    public Scooter findById(@PathVariable String id) {
+        Scooter found_scooter = scooterRepo.findById(Long.parseLong(id));
+
+        if (found_scooter == null) {
             throw new UserNotFoundException("User " + id + " not found");
         }
-        return scooterRepo.findById(id);
+
+        return found_scooter;
     }
 
     @PostMapping("/")
@@ -55,12 +57,12 @@ public class ScooterController {
         Scooter scooter = new Scooter();
 
         JSONObject scooter_details = new JSONObject(scooter_json).getJSONObject("scooter");
-        scooter.setId(scooter_details.getLong("_id"));
-        scooter.setTag(scooter_details.getString("_tag"));
-        scooter.setStatus(scooter_details.getString("_status"));
-        scooter.setGpsLocation(scooter_details.getString("_gpsLocation"));
-        scooter.setMileage(scooter_details.getInt("_mileage"));
-        scooter.setBatteryCharge(scooter_details.getInt("_batteryCharge"));
+        scooter.setId(scooter_details.getLong("id"));
+        scooter.setTag(scooter_details.getString("tag"));
+        scooter.setStatus(scooter_details.getString("status"));
+        scooter.setGpsLocation(scooter_details.getString("gpsLocation"));
+        scooter.setMileage(scooter_details.getInt("mileage"));
+        scooter.setBatteryCharge(scooter_details.getInt("batteryCharge"));
 
         Scooter saveScooter = scooterRepo.save(scooter);
 

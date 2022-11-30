@@ -1,6 +1,6 @@
 <template>
 
-  <button v-on:click="$emit('delScooter')" class="buttonScooter">Delete scooter</button>
+  <button v-on:click="$emit('delScooter')" class="buttonScooter">Delete</button>
   <button class="buttonScooter" v-show="true" :disabled="enablevalue" @click="onSave">Save</button>
   <button class="buttonScooter"  v-show="true" @click="onCancel">Cancel</button>
   <button class="buttonScooter " v-show="true" :disabled="enablevalue" @click="onReset">Reset</button>
@@ -58,19 +58,20 @@ export default {
   data() {
     return {
       scooter: null,
-      copy: '',
+      copy: null,
       enablevalue: false,
-      scooters: []
     }
   },
 
-  async mounted() {
-    await this.findSelectedFromRouteParam();
-  },
+  watch: {
+    '$route.params.id': {
+      handler: function(id) {
+        this.getScooter(id);
+      },
 
-  created(){
-    this.copy = Scooter.copyConstructer(this.scooter);
-    this.enablevalue = false;
+      deep: true,
+      immediate: true
+    }
   },
 
   methods: {
@@ -93,29 +94,28 @@ export default {
       this.enablevalue = true
     },
 
-    onCancel (){
+    async onCancel (){
       if (this.saved === false){
         this.onReset()
       }
-      this.$router.push({path : "/scooters/overview37"});
-      window.location.reload();
+      await this.$router.push({path : "/scooters/overview37"});
+      location.reload();
     },
 
     async onSave(){
-      this.saved = true;
       await this.scooterService.asyncSave(this.scooter);
-      this.onCancel();
+      this.saved = true;
+
+      await this.onCancel();
     },
 
-    async findSelectedFromRouteParam() {
-      this.scooters = await this.scooterService.asyncFindALL();
-      let id = this.$route.params.id;
+    async getScooter(id) {
+      // Only get scooter if id has changed
+      if (id === undefined) return;
 
-      await this.scooters.find(s => {
-        if (id == s.id) {
-          this.scooter = s;
-        }
-      })
+      this.scooter = await this.scooterService.asyncFindById(id);
+      this.copy = Scooter.copyConstructer(this.scooter);
+      this.enablevalue = false;
     }
   }
 }

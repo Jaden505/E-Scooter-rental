@@ -36,6 +36,11 @@ export class ScooterAdaptor{
         return Scooter.copyConstructer(scooterReturned)
     }
 
+    async asyncFindById(id){
+        console.log('ScooterAdaptor .asyncFindByID()...');
+        return await this.fetchJson(this.resourcesUrl + id, {method: 'GET'});
+    }
+
     async asyncDeleteById(id){
         console.log('ScooterAdaptor .asyncDeleteByID()...');
         return await this.fetchJson(this.resourcesUrl + id, {method: 'DELETE'});
