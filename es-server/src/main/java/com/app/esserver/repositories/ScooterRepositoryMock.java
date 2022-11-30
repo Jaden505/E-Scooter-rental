@@ -10,7 +10,7 @@ import java.util.Random;
 public class ScooterRepositoryMock implements ScooterRepository {
     List<Scooter> scooters = new ArrayList<>();
 
-    private static int scooterCount = 3007;
+    private static int scooterCount = 3008;
 
 
     public List<Scooter> findAll() {

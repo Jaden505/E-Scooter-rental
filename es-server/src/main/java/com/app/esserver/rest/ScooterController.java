@@ -40,7 +40,15 @@ public class ScooterController {
         return scooterRepo.findById(id);
     }
 
-//    @PostMapping("/")
+    @PostMapping("/")
+    @ResponseBody
+    public Scooter saveScooter() {
+        Scooter scooter = new Scooter(0);
+        Scooter saveScooter = scooterRepo.save(scooter);
+
+        return saveScooter;
+    }
+
     @PutMapping("/")
     @ResponseBody
     public Scooter saveScooter(@RequestBody String scooter_json) throws JSONException {
@@ -56,29 +64,13 @@ public class ScooterController {
 
         Scooter saveScooter = scooterRepo.save(scooter);
 
-        return scooter;
+        return saveScooter;
     }
 
     @DeleteMapping("/{id}")
-    public Scooter deleteById(@PathVariable String id_json) throws JSONException {
-        Long id = new JSONObject(id_json).getLong("_id");
-        return scooterRepo.deleteById(id);
+    public Scooter deleteById(@PathVariable String id) {
+        return scooterRepo.deleteById(Long.parseLong(id));
     }
-
-    @PutMapping("/{id}")
-    public Scooter saveScooter(@PathVariable long id, @RequestBody Scooter scooter) {
-        Scooter scooterFound = scooterRepo.findById(id);
-        if (scooterFound == null) {
-            throw new UserNotFoundException("User " + id + " not found");
-        }
-
-        if (!(scooterFound.getId() == id)){
-            throw new PreConditionFailed("User " + id + " not found");
-        }
-
-        return scooter;
-    }
-
 
     @GetMapping("/summary")
     public MappingJacksonValue getScootersSummary() {

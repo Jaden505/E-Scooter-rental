@@ -22,22 +22,22 @@ export class ScooterAdaptor{
         return scooters?.map(s=>Scooter.copyConstructer(s));
     }
 
-    async asyncFindbyId(id){
-        console.log('ScooterAdaptor .asyncFindById()...');
-        const scooters = await this.fetchJson(this.resourcesUrl);
-        return scooters?.stream().filter(scooter => scooter.getById == id).findFirst().orElse(null);
-
-    }
     async asyncSave(scooter){
         console.log('ScooterAdaptor .asyncSave()...');
-        const scooterReturned = await this.fetchJson(this.resourcesUrl, {method: 'PUT', body: JSON.stringify(
+
+        let scooterReturned;
+
+        if (scooter == null)
+            scooterReturned = await this.fetchJson(this.resourcesUrl, {method: 'POST'});
+        else
+        scooterReturned = await this.fetchJson(this.resourcesUrl, {method: 'PUT', body: JSON.stringify(
             {scooter: scooter}), headers: {'Content-type': 'application/json; charset=UTF-8'}});
+
         return Scooter.copyConstructer(scooterReturned)
     }
 
     async asyncDeleteById(id){
         console.log('ScooterAdaptor .asyncDeleteByID()...');
-        return await this.fetchJson(this.resourcesUrl + id, {method: 'DELETE', body: JSON.stringify(
-                {id: id}), headers: {'Content-type': 'application/json; charset=UTF-8'}});
+        return await this.fetchJson(this.resourcesUrl + id, {method: 'DELETE'});
     }
 }

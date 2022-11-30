@@ -48,9 +48,10 @@ export default {
     },
 
     async newScooter() {
-      const new_scooter = await this.scooterService.asyncSave(new Scooter(0));
+      const new_scooter = await this.scooterService.asyncSave(null);
+
+      this.onSelect(new_scooter);
       this.scooters.push(new_scooter);
-      this.selected_scooter = new_scooter;
 
       // Scroll to bottom
       setTimeout(f => this.$refs.scroll.scrollTop = this.$refs.scroll.scrollHeight, 100);
@@ -76,8 +77,6 @@ export default {
     },
   }
 }
-
-import Scooter from "@/models/scooter";
 </script>
 
 <style scoped>
