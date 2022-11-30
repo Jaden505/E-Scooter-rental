@@ -81,7 +81,7 @@ export default {
       }
       this.scooter.tag = ' '
       this.scooter.batteryCharge = ' '
-      this.scooter.gpsLocation.longitude = ' '
+      this.scooter.gpsLocation = ' '
       this.scooter.mileage = ' '
       this.enablevalue = true
     },
@@ -89,9 +89,8 @@ export default {
     onReset(){
       this.scooter.tag = this.copy.tag
       this.scooter.batteryCharge = this.copy.batteryCharge
-      this.scooter.gpsLocation.longitude = this.copy.gpsLocation
+      this.scooter.gpsLocation = this.copy.gpsLocation
       this.scooter.mileage = this.copy.mileage
-      this.enablevalue = true
     },
 
     async onCancel (){
