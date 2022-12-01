@@ -2,6 +2,7 @@ package com.app.esserver;
 
 import com.app.esserver.models.Scooter;
 import com.app.esserver.repositories.ScooterRepository;
+import com.app.esserver.repositories.ScooterRepositoryMock;
 import com.app.esserver.repositories.ScootersRepositoryJpa;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -41,7 +42,8 @@ public class EsServerApplication implements CommandLineRunner {
         List<Scooter> scooters = this. scootersRepo.findAll();
         if (scooters.size() > 0) return;
         for (int i = 0; i < 10; i++) {
-            Scooter.creatSampleScooter(i);
+            Scooter newScooter = Scooter.creatSampleScooter(i);
+            this.scootersRepo.save(newScooter);
         }
     }
 }
