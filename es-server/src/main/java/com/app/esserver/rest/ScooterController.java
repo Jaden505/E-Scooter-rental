@@ -3,11 +3,14 @@ package com.app.esserver.rest;
 import com.app.esserver.exceptions.PreConditionFailed;
 import com.app.esserver.exceptions.UserNotFoundException;
 import com.app.esserver.models.Scooter;
+import com.app.esserver.repositories.ScooterRepository;
 import com.app.esserver.repositories.ScooterRepositoryMock;
 
+import com.app.esserver.repositories.ScootersRepositoryJpa;
 import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.http.ResponseEntity;
@@ -22,8 +25,10 @@ import java.util.Optional;
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("/scooters")
+
 public class ScooterController {
-    private ScooterRepositoryMock scooterRepo = new ScooterRepositoryMock();
+    @Autowired
+    private ScooterRepository scooterRepo = new ScootersRepositoryJpa();
 
 
     @GetMapping("/")
