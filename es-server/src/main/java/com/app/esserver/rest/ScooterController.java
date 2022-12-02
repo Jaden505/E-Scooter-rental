@@ -4,6 +4,7 @@ import com.app.esserver.exceptions.PreConditionFailed;
 import com.app.esserver.exceptions.UserNotFoundException;
 import com.app.esserver.models.Scooter;
 
+import com.app.esserver.models.Trip;
 import com.app.esserver.repositories.AbstractEntityRepositoryJpa;
 import com.app.esserver.repositories.ScootersRepositoryJpa;
 import com.fasterxml.jackson.databind.ser.FilterProvider;
@@ -88,5 +89,13 @@ public class ScooterController {
         mjv.setFilters(fp);
         return mjv;
 
+    }
+
+    @PostMapping("/{scooterId}/trips")
+    public Scooter addNewTripToScooter(@PathVariable long scooterId) {
+        Scooter scooter = scooterRepo.findById(scooterId);
+        scooter.addTrip(new Trip());
+
+        return scooter;
     }
 }

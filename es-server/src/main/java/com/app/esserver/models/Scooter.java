@@ -116,5 +116,13 @@ public class Scooter implements Identifable {
     public void setMileage(double mileage) {
         this.mileage = mileage;
     }
+
+    public Set<Trip> getTrips() {
+        return trips;
+    }
+
+    public void addTrip(Trip trip) {
+        this.trips.add(trip);
+    }
 }
 
