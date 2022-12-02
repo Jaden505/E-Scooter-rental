@@ -14,9 +14,13 @@ import java.util.List;
 @Repository
 @Transactional
 @Primary
-public class ScootersRepositoryJpa implements ScooterRepository{
+public class ScootersRepositoryJpa extends AbstractEntityRepositoryJpa<Scooter> {
     @PersistenceContext
     private EntityManager entityManager;
+
+    public ScootersRepositoryJpa() {
+        super(Scooter.class);
+    }
     @Override
     public List<Scooter> findAll() {
         TypedQuery<Scooter> namedQuery = this.entityManager.createQuery("SELECT s FROM Scooter s", Scooter.class);

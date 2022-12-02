@@ -3,9 +3,8 @@ package com.app.esserver.rest;
 import com.app.esserver.exceptions.PreConditionFailed;
 import com.app.esserver.exceptions.UserNotFoundException;
 import com.app.esserver.models.Scooter;
-import com.app.esserver.repositories.ScooterRepository;
-import com.app.esserver.repositories.ScooterRepositoryMock;
 
+import com.app.esserver.repositories.AbstractEntityRepositoryJpa;
 import com.app.esserver.repositories.ScootersRepositoryJpa;
 import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
@@ -28,8 +27,7 @@ import java.util.Optional;
 
 public class ScooterController {
     @Autowired
-    private ScooterRepository scooterRepo = new ScootersRepositoryJpa();
-
+    private ScootersRepositoryJpa scooterRepo = new ScootersRepositoryJpa();
 
     @GetMapping("/")
     public List<Scooter> findAll() {
@@ -91,6 +89,4 @@ public class ScooterController {
         return mjv;
 
     }
-
-
 }

@@ -1,18 +1,17 @@
 package com.app.esserver.models;
 
+import com.app.esserver.repositories.Identifable;
 import com.fasterxml.jackson.annotation.JsonView;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.NamedQuery;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Set;
 
 @Entity
-@NamedQuery(name = "select_all", query = "select p from Scooter p")
-public class Scooter {
-
+@Table(name="SCOOTER")
+@NamedQuery(name = "select_all_scooters", query = "select p from Scooter p")
+public class Scooter implements Identifable {
     @Id
     @GeneratedValue
     private long id;
@@ -21,6 +20,9 @@ public class Scooter {
     private String gpsLocation;
     private int batteryCharge;
     private double mileage;
+
+    @OneToMany(mappedBy = "id")
+    Set<Trip> trips;
 
     public Scooter(long id, String tag, String status, String gpsLocation, int batteryCharge, double mileage) {
         this.id = id;
