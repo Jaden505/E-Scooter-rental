@@ -20,6 +20,7 @@ public class Scooter implements Identifable {
     private String gpsLocation;
     private int batteryCharge;
     private double mileage;
+    private long currentTripId;
 
     @OneToMany(mappedBy = "id")
     Set<Trip> trips;
@@ -123,6 +124,14 @@ public class Scooter implements Identifable {
 
     public void addTrip(Trip trip) {
         this.trips.add(trip);
+    }
+
+    public long getCurrentTripId() {
+        return currentTripId;
+    }
+
+    public void setCurrentTripId(long currentTripId) {
+        this.currentTripId = currentTripId;
     }
 }
 

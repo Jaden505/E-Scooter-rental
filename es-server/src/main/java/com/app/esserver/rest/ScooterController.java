@@ -6,6 +6,7 @@ import com.app.esserver.models.Scooter;
 
 import com.app.esserver.models.Trip;
 import com.app.esserver.repositories.AbstractEntityRepositoryJpa;
+import com.app.esserver.repositories.EntityRepository;
 import com.app.esserver.repositories.ScootersRepositoryJpa;
 import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
@@ -28,7 +29,7 @@ import java.util.Optional;
 
 public class ScooterController {
     @Autowired
-    private ScootersRepositoryJpa scooterRepo = new ScootersRepositoryJpa();
+    private EntityRepository<Scooter> scooterRepo;
 
     @GetMapping("/")
     public List<Scooter> findAll() {
