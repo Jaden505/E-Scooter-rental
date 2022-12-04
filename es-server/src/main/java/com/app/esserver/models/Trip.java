@@ -17,8 +17,8 @@ public class Trip implements Identifable {
     private long id;
 
     @ManyToOne
-    @JoinColumn(name="scooterId", nullable = false)
-    private Scooter scooterId;
+    @JoinColumn(name="scooter", nullable = false)
+    private Scooter scooter;
 
     private LocalDateTime startDate;
     private LocalDateTime endDate;
@@ -81,6 +81,14 @@ public class Trip implements Identifable {
 
     public void setCost(double cost) {
         this.cost = cost;
+    }
+
+    public Scooter getScooter() {
+        return scooter;
+    }
+
+    public void setScooter(Scooter scooter) {
+        this.scooter = scooter;
     }
 }
 

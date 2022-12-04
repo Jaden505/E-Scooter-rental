@@ -37,8 +37,8 @@ public class ScooterController {
     }
 
     @GetMapping("/{id}")
-    public Scooter findById(@PathVariable String id) {
-        Scooter found_scooter = scooterRepo.findById(Long.parseLong(id));
+    public Scooter findById(@PathVariable long id) {
+        Scooter found_scooter = scooterRepo.findById(id);
 
         if (found_scooter == null) {
             throw new UserNotFoundException("User " + id + " not found");
@@ -58,25 +58,14 @@ public class ScooterController {
 
     @PutMapping("/")
     @ResponseBody
-    public Scooter saveScooter(@RequestBody String scooter_json) throws JSONException {
-        Scooter scooter = new Scooter();
-
-        JSONObject scooter_details = new JSONObject(scooter_json).getJSONObject("scooter");
-        scooter.setId(scooter_details.getLong("id"));
-        scooter.setTag(scooter_details.getString("tag"));
-        scooter.setStatus(scooter_details.getString("status"));
-        scooter.setGpsLocation(scooter_details.getString("gpsLocation"));
-        scooter.setMileage(scooter_details.getInt("mileage"));
-        scooter.setBatteryCharge(scooter_details.getInt("batteryCharge"));
-
-        Scooter saveScooter = scooterRepo.save(scooter);
-
-        return saveScooter;
+    public Scooter saveScooter(@RequestBody Scooter scooter) {
+        System.out.println(scooter);
+         return scooterRepo.save(scooter);
     }
 
     @DeleteMapping("/{id}")
-    public Scooter deleteById(@PathVariable String id) {
-        return scooterRepo.deleteById(Long.parseLong(id));
+    public Scooter deleteById(@PathVariable long id) {
+        return scooterRepo.deleteById(id);
     }
 
     @GetMapping("/summary")
@@ -89,14 +78,5 @@ public class ScooterController {
 
         mjv.setFilters(fp);
         return mjv;
-
-    }
-
-    @PostMapping("/{scooterId}/trips")
-    public Scooter addNewTripToScooter(@PathVariable long scooterId) {
-        Scooter scooter = scooterRepo.findById(scooterId);
-        scooter.addTrip(new Trip());
-
-        return scooter;
     }
 }
