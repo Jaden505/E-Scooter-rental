@@ -10,7 +10,16 @@ import java.util.Random;
 
 @Entity
 @Table(name="TRIP")
-@NamedQuery(name = "select_all_trips", query = "select t from Trip t")
+@NamedQueries({
+        @NamedQuery(
+                name = "select_all_trips",
+                query = "select t from Trip t"
+        ),
+        @NamedQuery(
+                name = "Trip_find_by_scooterId_and_period",
+                query = "select t from Trip t where t.scooter.id=?1 and t.startDate=?2 and t.endDate=?3"
+        )
+})
 public class Trip implements Identifable {
     @Id
     @GeneratedValue

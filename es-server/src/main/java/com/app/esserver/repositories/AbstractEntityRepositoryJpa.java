@@ -2,6 +2,7 @@ package com.app.esserver.repositories;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import java.util.List;
@@ -46,5 +47,16 @@ public abstract class AbstractEntityRepositoryJpa<E extends Identifable>
             entityManager.remove(entity);
         }
         return entity;
+    }
+
+    @Override
+    public List<E> findByQuery(String jpqlName, Object... params) {
+        Query query = entityManager.createNamedQuery(jpqlName);
+
+        for (int i = 0; i < params.length; i++) {
+            query.setParameter(i+1, params[i]);
+        }
+
+        return query.getResultList();
     }
 }

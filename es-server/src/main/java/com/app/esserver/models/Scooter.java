@@ -10,7 +10,20 @@ import java.util.Set;
 
 @Entity
 @Table(name="SCOOTER")
-@NamedQuery(name = "select_all_scooters", query = "select p from Scooter p")
+@NamedQueries({
+        @NamedQuery(
+                name = "select_all_scooters",
+                query = "select p from Scooter p"
+        ),
+        @NamedQuery(
+                name = "Scooter_find_by_status",
+                query = "select p from Scooter p where p.status=?1"
+        ),
+        @NamedQuery(
+                name = "Scooter_find_by_battery",
+                query = "select p from Scooter p where p.batteryCharge=?1"
+        )
+})
 public class Scooter implements Identifable {
     @Id
     @GeneratedValue

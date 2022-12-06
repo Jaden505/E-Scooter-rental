@@ -32,7 +32,14 @@ public class ScooterController {
     private EntityRepository<Scooter> scooterRepo;
 
     @GetMapping("/")
-    public List<Scooter> findAll() {
+    public List<Scooter> findAll(@RequestParam Optional<String> status, @RequestParam Optional<Integer> battery) {
+        if (status.isPresent()) {
+            return scooterRepo.findByQuery("Scooter_find_by_status", status.get());
+        }
+        else if (battery.isPresent()) {
+            return scooterRepo.findByQuery("Scooter_find_by_battery", battery.get());
+        }
+
         return scooterRepo.findAll();
     }
 
