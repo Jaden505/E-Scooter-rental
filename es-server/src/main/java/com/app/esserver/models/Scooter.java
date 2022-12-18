@@ -25,6 +25,12 @@ import java.util.Set;
         )
 })
 public class Scooter implements Identifable {
+    public static enum Status {
+        IDLE,
+        ACTIVE,
+        MAINTENACE
+    }
+
     @Id
     @GeneratedValue
     private long id;

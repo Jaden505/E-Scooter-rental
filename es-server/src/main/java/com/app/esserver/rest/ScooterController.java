@@ -14,6 +14,8 @@ import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.stereotype.Service;
@@ -31,16 +33,27 @@ public class ScooterController {
     @Autowired
     private EntityRepository<Scooter> scooterRepo;
 
-    @GetMapping("/")
-    public List<Scooter> findAll(@RequestParam Optional<String> status, @RequestParam Optional<Integer> battery) {
+    @GetMapping("")
+    public ResponseEntity findAll(@RequestParam Optional<String> status, @RequestParam Optional<Integer> battery) {
         if (status.isPresent()) {
-            return scooterRepo.findByQuery("Scooter_find_by_status", status.get());
-        }
-        else if (battery.isPresent()) {
-            return scooterRepo.findByQuery("Scooter_find_by_battery", battery.get());
+            try {
+                Scooter.Status s = Scooter.Status.valueOf(status.get().toUpperCase());
+                if (s instanceof Scooter.Status)
+                    return new ResponseEntity(scooterRepo.findByQuery(
+                            "Scooter_find_by_status", status.get().toUpperCase()), HttpStatus.OK);
+                else
+                    return new ResponseEntity("Not a correct status", HttpStatus.BAD_REQUEST);
+            } catch (IllegalArgumentException e) {
+                return new ResponseEntity("Not a correct status", HttpStatus.BAD_REQUEST);
+            }
         }
 
-        return scooterRepo.findAll();
+        else if (battery.isPresent()) {
+                return new ResponseEntity(scooterRepo.findByQuery(
+                        "Scooter_find_by_battery", battery.get()), HttpStatus.OK);
+        }
+
+        return new ResponseEntity(scooterRepo.findAll(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
