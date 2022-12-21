@@ -1,6 +1,7 @@
 package com.app.esserver.models;
 
 import com.app.esserver.repositories.Identifable;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import javax.persistence.*;
@@ -13,7 +14,7 @@ import java.util.Random;
 @NamedQueries({
         @NamedQuery(
                 name = "select_all_trips",
-                query = "select t from Trip t"
+                query = "select t from Trip t where t.scooter.id=?1"
         ),
         @NamedQuery(
                 name = "Trip_find_by_scooterId_and_period",
@@ -25,6 +26,7 @@ public class Trip implements Identifable {
     @GeneratedValue
     private long id;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name="scooter", nullable = false)
     private Scooter scooter;

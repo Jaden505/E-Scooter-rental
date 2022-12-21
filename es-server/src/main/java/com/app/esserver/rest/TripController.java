@@ -9,6 +9,10 @@ import com.app.esserver.exceptions.PreConditionFailed;
 
 import java.time.LocalDateTime;
 import java.lang.Integer;
+import java.util.Arrays;
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -19,6 +23,18 @@ public class TripController {
 
     @Autowired
     private EntityRepository<Scooter> scooterRepo;
+
+    @GetMapping("/{scooterId}/trips")
+    public Set<Trip> getTripsOfScooter(@PathVariable long scooterId, @RequestParam(required = false) String from, @RequestParam(required = false) String to) {
+        Scooter scooter = scooterRepo.findById(scooterId);
+
+        if (scooter == null) return null;
+
+        else if (from != null && to != null)
+            return tripRepo.findByQuery("select_all_trips", scooterId).stream().collect(Collectors.toSet());
+
+        return tripRepo.findByQuery("Trip_find_by_scooterId_and_period", scooterId, from, to).stream().collect(Collectors.toSet());
+    }
 
     @PostMapping("/{scooterId}/trips")
     public Trip addTripToScooter(@RequestBody Trip trip, @PathVariable long scooterId) {
@@ -34,9 +50,10 @@ public class TripController {
         }
 
         trip.setScooter(scooter);
-        tripRepo.save(trip);
+        Trip savedTrip = tripRepo.save(trip);
 
-        scooter.addTrip(trip);
+        scooter.addTrip(tripRepo.findById(savedTrip.getId()));
+        scooter.setCurrentTripId(savedTrip.getId());
         scooterRepo.save(scooter);
 
         return trip;

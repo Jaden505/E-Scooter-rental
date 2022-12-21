@@ -1,6 +1,7 @@
 package com.app.esserver.models;
 
 import com.app.esserver.repositories.Identifable;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import javax.persistence.*;
@@ -41,6 +42,7 @@ public class Scooter implements Identifable {
     private double mileage;
     private long currentTripId;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "id")
     Set<Trip> trips;
 
@@ -90,8 +92,6 @@ public class Scooter implements Identifable {
     public long getId() {
         return id;
     }
-
-
 
     public void setId(long id) {
         this.id = id;
