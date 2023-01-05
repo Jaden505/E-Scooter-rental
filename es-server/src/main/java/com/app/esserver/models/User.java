@@ -10,13 +10,6 @@ public class User {
     private String email;
     private String role;
 
-    public User(long id, String password, String name, String email, String role) {
-        this.id = id;
-        Password = password;
-        this.name = name;
-        this.email = email;
-        this.role = role;
-    }
 
     public long getId() {
         return id;
