@@ -14,7 +14,7 @@ import java.util.Random;
 @NamedQueries({
         @NamedQuery(
                 name = "select_all_trips",
-                query = "select t from Trip t where t.scooter=?1"
+                query = "select t from Trip t where t.scooter.id=?1"
         ),
         @NamedQuery(
                 name = "Trip_find_by_scooterId_and_period",
