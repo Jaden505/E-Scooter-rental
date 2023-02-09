@@ -12,12 +12,6 @@ public abstract class AbstractEntityRepositoryMock<E extends Identifable>
     private List<E> entities = new ArrayList<>();
 
     public List<E> findAll() {
-//        if (entities.size() > 0) {return entities;}
-
-//        for (int i=3000; i< 3008; i++) {
-//            entities.add(E.creatSampleScooter(i));
-//        }
-
         return entities;
     }
 

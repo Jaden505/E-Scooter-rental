@@ -31,7 +31,7 @@ public class TripController {
         if (scooter == null) return null;
 
         else if (from != null && to != null)
-            return tripRepo.findByQuery("select_all_trips", scooterId).stream().collect(Collectors.toSet());
+            return tripRepo.findByQuery("select_all_trips", scooter).stream().collect(Collectors.toSet());
 
         return tripRepo.findByQuery("Trip_find_by_scooterId_and_period", scooterId, from, to).stream().collect(Collectors.toSet());
     }
@@ -53,6 +53,7 @@ public class TripController {
         Trip savedTrip = tripRepo.save(trip);
 
         scooter.addTrip(tripRepo.findById(savedTrip.getId()));
+
         scooter.setCurrentTripId(savedTrip.getId());
         scooterRepo.save(scooter);
 

@@ -5,9 +5,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name="SCOOTER")
@@ -34,7 +32,7 @@ public class Scooter implements Identifable {
 
     @Id
     @GeneratedValue
-    private long id;
+    private long scooter_id;
     private String tag;
     private String status;
     private String gpsLocation;
@@ -43,11 +41,11 @@ public class Scooter implements Identifable {
     private long currentTripId;
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "id", cascade = CascadeType.ALL)
-    Set<Trip> trips;
+    @OneToMany(mappedBy="scooter", cascade=CascadeType.ALL)
+    List<Trip> trips;
 
     public Scooter(long id, String tag, String status, String gpsLocation, int batteryCharge, double mileage) {
-        this.id = id;
+        this.scooter_id = id;
         this.tag = tag;
         this.status = status;
         this.gpsLocation = gpsLocation;
@@ -56,18 +54,20 @@ public class Scooter implements Identifable {
     }
 
     public Scooter(String tag) {
-        id = 0;
+        this.scooter_id = 0;
         this.tag = tag;
-        status = null;
-        gpsLocation = null ;
-        batteryCharge = 0;
-        mileage = 0.0;
+        this.status = null;
+        this.gpsLocation = null ;
+        this.batteryCharge = 0;
+        this.mileage = 0.0;
     }
 
     public Scooter(long id) {
+        this.scooter_id = id;
     }
 
     public Scooter() {
+        this.scooter_id = 0;
     }
 
     public static Scooter creatSampleScooter(long id){
@@ -87,14 +87,16 @@ public class Scooter implements Identifable {
 
         scooter.setTag(Long.toHexString(Double.doubleToLongBits(Math.random())));
 
+        scooter.setTrips(new ArrayList<Trip>());
+
         return scooter;
     }
     public long getId() {
-        return id;
+        return scooter_id;
     }
 
     public void setId(long id) {
-        this.id = id;
+        this.scooter_id = id;
     }
 
     public String getTag() {
@@ -137,7 +139,7 @@ public class Scooter implements Identifable {
         this.mileage = mileage;
     }
 
-    public Set<Trip> getTrips() {
+    public List<Trip> getTrips() {
         return trips;
     }
 
@@ -151,6 +153,10 @@ public class Scooter implements Identifable {
 
     public void setCurrentTripId(long currentTripId) {
         this.currentTripId = currentTripId;
+    }
+
+    public void setTrips(List<Trip> trips) {
+        this.trips = trips;
     }
 }
 

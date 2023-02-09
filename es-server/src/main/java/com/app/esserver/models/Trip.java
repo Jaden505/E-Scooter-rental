@@ -14,7 +14,7 @@ import java.util.Random;
 @NamedQueries({
         @NamedQuery(
                 name = "select_all_trips",
-                query = "select t from Trip t where t.scooter.id=?1"
+                query = "select t from Trip t where t.scooter=?1"
         ),
         @NamedQuery(
                 name = "Trip_find_by_scooterId_and_period",
@@ -28,7 +28,7 @@ public class Trip implements Identifable {
 
     @JsonBackReference
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="scooter", nullable = false)
+    @JoinColumn(name="scooter_id", nullable = false)
     private Scooter scooter;
 
     private LocalDateTime startDate;
@@ -46,6 +46,7 @@ public class Trip implements Identifable {
         Random random = new Random();
         Trip trip = new Trip(id);
 
+        trip.setId(id);
         trip.setStartDate(LocalDateTime.now());
         trip.setEndDate(LocalDateTime.now());
         trip.setStartPosition("Amsterdam");

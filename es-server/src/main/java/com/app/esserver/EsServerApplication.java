@@ -13,6 +13,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import java.util.HashSet;
 import java.util.List;
 
 @SpringBootApplication
@@ -50,11 +51,14 @@ public class EsServerApplication implements CommandLineRunner {
         if (trips.size() > 0) return;
 
         for (int i = 0; i < 10; i++) {
-            Scooter newScooter = Scooter.creatSampleScooter(i);
-            Trip newTrip = Trip.creatSampleTrip(i, newScooter);
+            Scooter scooter = Scooter.creatSampleScooter(i);
+            Trip trip = Trip.creatSampleTrip(i, scooter);
 
-            this.scootersRepo.save(newScooter);
-            this.tripRepo.save(newTrip);
+            trip.setScooter(scooter);
+            scooter.addTrip(trip);
+
+            this.scootersRepo.save(scooter);
+            this.tripRepo.save(trip);
         }
     }
 }
