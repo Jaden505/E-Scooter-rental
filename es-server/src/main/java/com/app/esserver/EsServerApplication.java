@@ -1,7 +1,9 @@
 package com.app.esserver;
 
 import com.app.esserver.models.Scooter;
+import com.app.esserver.models.Trip;
 import com.app.esserver.repositories.ScootersRepositoryJpa;
+import com.app.esserver.repositories.TripRepositoryJpa;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -31,17 +33,28 @@ public class EsServerApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        createSample();
+        createSamples();
     }
 
     @Autowired
     private ScootersRepositoryJpa scootersRepo = new ScootersRepositoryJpa();
-    private void createSample(){
+
+    @Autowired
+    private TripRepositoryJpa tripRepo = new TripRepositoryJpa();
+
+    private void createSamples(){
         List<Scooter> scooters = this.scootersRepo.findAll();
+        List<Trip> trips = this.tripRepo.findAll();
+
         if (scooters.size() > 0) return;
+        if (trips.size() > 0) return;
+
         for (int i = 0; i < 10; i++) {
             Scooter newScooter = Scooter.creatSampleScooter(i);
+            Trip newTrip = Trip.creatSampleTrip(i, newScooter);
+
             this.scootersRepo.save(newScooter);
+            this.tripRepo.save(newTrip);
         }
     }
 }

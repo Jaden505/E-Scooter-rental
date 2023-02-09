@@ -53,7 +53,12 @@ public class ScooterController {
                         "Scooter_find_by_battery", battery.get()), HttpStatus.OK);
         }
 
-        return new ResponseEntity(scooterRepo.findAll(), HttpStatus.OK);
+        List<Scooter> scooters = scooterRepo.findAll();
+        if (scooters == null || scooters.size() == 0) {
+            throw new UserNotFoundException("No scooters found");
+        }
+
+        return new ResponseEntity(scooters, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")

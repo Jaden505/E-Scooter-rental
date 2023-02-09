@@ -27,7 +27,7 @@ public class Trip implements Identifable {
     private long id;
 
     @JsonBackReference
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="scooter", nullable = false)
     private Scooter scooter;
 
@@ -37,6 +37,25 @@ public class Trip implements Identifable {
     private String endPosition;
     private double mileage;
     private double cost;
+
+    public Trip() {}
+
+    public Trip(long id) {}
+
+    public static Trip creatSampleTrip(long id, Scooter scooter){
+        Random random = new Random();
+        Trip trip = new Trip(id);
+
+        trip.setStartDate(LocalDateTime.now());
+        trip.setEndDate(LocalDateTime.now());
+        trip.setStartPosition("Amsterdam");
+        trip.setEndPosition("Amstelveen");
+        trip.setMileage(10.0);
+        trip.setCost(10.0);
+        trip.setScooter(scooter);
+
+        return trip;
+    }
 
     public long getId() {
         return id;

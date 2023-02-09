@@ -43,7 +43,7 @@ public class Scooter implements Identifable {
     private long currentTripId;
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "id")
+    @OneToMany(mappedBy = "id", cascade = CascadeType.ALL)
     Set<Trip> trips;
 
     public Scooter(long id, String tag, String status, String gpsLocation, int batteryCharge, double mileage) {
