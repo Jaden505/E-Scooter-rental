@@ -4,6 +4,7 @@ import com.app.esserver.models.Scooter;
 import com.app.esserver.models.Trip;
 import com.app.esserver.repositories.EntityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 import com.app.esserver.exceptions.PreConditionFailed;
 
@@ -25,7 +26,8 @@ public class TripController {
     private EntityRepository<Scooter> scooterRepo;
 
     @GetMapping("/{scooterId}/trips")
-    public Set<Trip> getTripsOfScooter(@PathVariable long scooterId, @RequestParam(required = false) String from, @RequestParam(required = false) String to) {
+    public Set<Trip> getTripsOfScooter(@PathVariable long scooterId, @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    LocalDateTime from, @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime to) {
         Scooter scooter = scooterRepo.findById(scooterId);
 
         if (scooter == null) return null;

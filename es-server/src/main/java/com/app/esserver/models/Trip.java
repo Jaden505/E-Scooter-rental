@@ -18,7 +18,7 @@ import java.util.Random;
         ),
         @NamedQuery(
                 name = "Trip_find_by_scooterId_and_period",
-                query = "select t from Trip t where t.scooter.id=?1 and t.startDate=?2 and t.endDate=?3"
+                query = "select t from Trip t where t.scooter.id=?1 and ?2 <= t.startDate and ?3 >= t.endDate"
         )
 })
 public class Trip implements Identifable {
