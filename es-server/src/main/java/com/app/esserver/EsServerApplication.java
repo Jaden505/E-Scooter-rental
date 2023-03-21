@@ -47,15 +47,16 @@ public class EsServerApplication implements CommandLineRunner {
         List<Scooter> scooters = this.scootersRepo.findAll();
         List<Trip> trips = this.tripRepo.findAll();
 
-        if (scooters.size() > 0) return;
-        if (trips.size() > 0) return;
+        if (scooters.size() > 0 || trips.size() > 0) return;
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 1; i < 20; i++) {
             Scooter scooter = Scooter.creatSampleScooter(i);
-            Trip trip = Trip.creatSampleTrip((i+1)*20, scooter);
+            Trip trip = Trip.creatSampleTrip(300 + i, scooter);
+            Trip trip2 = Trip.creatSampleTrip(300 + i, scooter);
 
             trip.setScooter(scooter);
             scooter.addTrip(trip);
+            scooter.addTrip(trip2);
 
             this.scootersRepo.save(scooter);
             this.tripRepo.save(trip);

@@ -42,7 +42,7 @@ public class Scooter implements Identifable {
 
     @JsonManagedReference
     @OneToMany(mappedBy="scooter", cascade=CascadeType.ALL)
-    List<Trip> trips;
+    List<Trip> trips = new ArrayList<Trip>();
 
     public Scooter(long id, String tag, String status, String gpsLocation, int batteryCharge, double mileage) {
         this.scooter_id = id;
@@ -56,10 +56,6 @@ public class Scooter implements Identifable {
     public Scooter(String tag) {
         this.scooter_id = 0;
         this.tag = tag;
-        this.status = null;
-        this.gpsLocation = null ;
-        this.batteryCharge = 0;
-        this.mileage = 0.0;
     }
 
     public Scooter(long id) {
@@ -74,8 +70,6 @@ public class Scooter implements Identifable {
         Random random = new Random();
         Scooter scooter = new Scooter(id);
 
-        scooter.setId(id);
-
         String[] state = {"IDLE", "ACTIVE", "MAINTENANCE"};
         scooter.setStatus(state[random.nextInt(state.length)]);
 
@@ -86,8 +80,6 @@ public class Scooter implements Identifable {
         scooter.setGpsLocation(Integer.toString(random.nextInt(500000)) + ", " + Integer.toString(random.nextInt(500000)));
 
         scooter.setTag(Long.toHexString(Double.doubleToLongBits(Math.random())));
-
-        scooter.setTrips(new ArrayList<Trip>());
 
         return scooter;
     }

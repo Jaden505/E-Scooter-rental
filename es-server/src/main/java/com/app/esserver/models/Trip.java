@@ -40,20 +40,21 @@ public class Trip implements Identifable {
 
     public Trip() {}
 
-    public Trip(long id) {}
+    public Trip(long id) {
+        this.id = id;
+    }
 
     public static Trip creatSampleTrip(long id, Scooter scooter){
         Random random = new Random();
         Trip trip = new Trip(id);
 
-        trip.setId(id);
         trip.setStartDate(LocalDateTime.now());
         trip.setEndDate(LocalDateTime.now());
         trip.setStartPosition("Amsterdam");
         trip.setEndPosition("Amstelveen");
         trip.setMileage(10.0);
         trip.setCost(10.0);
-        trip.setScooter(scooter);
+//        trip.setScooter(scooter);
 
         return trip;
     }
