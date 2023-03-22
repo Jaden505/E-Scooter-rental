@@ -52,9 +52,8 @@ public class EsServerApplication implements CommandLineRunner {
         for (int i = 1; i < 20; i++) {
             Scooter scooter = Scooter.creatSampleScooter(i);
             Trip trip = Trip.creatSampleTrip(300 + i, scooter);
-            Trip trip2 = Trip.creatSampleTrip(300 + i, scooter);
+            Trip trip2 = Trip.creatSampleTrip(900 + i, scooter);
 
-            trip.setScooter(scooter);
             scooter.addTrip(trip);
             scooter.addTrip(trip2);
 

@@ -54,7 +54,7 @@ public class Trip implements Identifable {
         trip.setEndPosition("Amstelveen");
         trip.setMileage(10.0);
         trip.setCost(10.0);
-//        trip.setScooter(scooter);
+        trip.setScooter(scooter);
 
         return trip;
     }
