@@ -5,7 +5,6 @@ public class User {
     private long id;
 
     private String Password;
-
     private String name;
     private String email;
     private String role;
@@ -50,4 +49,7 @@ public class User {
     public void setRole(String role) {
         this.role = role;
     }
+
+
+
 }
