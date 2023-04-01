@@ -18,8 +18,8 @@
       <a>MY TRIPS</a>
       <a>MY ACCOUNT</a>
       <div class="rightnav">
-        <a href="/sign-up">SIGN UP</a>
-        <a href="/sign-in">LOG IN</a>
+          <a><router-link to="/sign-up">SIGN UP</router-link></a>
+          <a><router-link to="/sign-in">LOG IN</router-link></a>
       </div>
     </div>
 </template>
