@@ -42,9 +42,9 @@ public class JWToken {
         Key key = getKey(passphrase);
 
         return Jwts.builder()
+                .claim(ROLE_CLAIM, this.role)
                 .claim(CALLNAME_CLAIM, this.callName)
                 .claim(USERID_CLAIM, this.userId)
-                .claim(ROLE_CLAIM, this.role)
                 .setIssuer(issuer)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + expiration * 1000L))
@@ -56,6 +56,5 @@ public class JWToken {
         byte[] hmacKey = passphrase.getBytes(StandardCharsets.UTF_8);
         return new SecretKeySpec(hmacKey, SignatureAlgorithm.HS512.getJcaName());
     }
-
 
 }
