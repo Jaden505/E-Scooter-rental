@@ -5,6 +5,7 @@ import com.app.esserver.utils.JWToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -13,7 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+@Component
 public class JwtRequestFilter extends OncePerRequestFilter {
+
     @Autowired
     private APIconfigurations apiConfig;
 
@@ -30,7 +33,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "no token!!");
             return;
         }
-        JWToken jwToken = JWToken.decode(encryptedtoken.replace("Bearer ", ""), apiConfig.getTokenPhrase());
+        JWToken jwToken = JWToken.decode(encryptedtoken.replace("Bearer ", ""), apiConfig.getPhrase());
 
         if (jwToken == null){
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "no  valid token!!");
