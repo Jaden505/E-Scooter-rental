@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class AuthenticationController {
 
+    @Autowired
     private APIconfigurations apiConfig;
+
     @PostMapping("/authentication/login")
     public ResponseEntity<User> login(@RequestBody ObjectNode form){
 

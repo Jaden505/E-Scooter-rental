@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import java.util.Set;
 
+@Configuration
 public class APIconfigurations {
 
     public Set<String> SECURED_PATHS =
