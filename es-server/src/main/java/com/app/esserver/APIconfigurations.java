@@ -12,37 +12,37 @@ public class APIconfigurations {
             Set.of("/secured", "/users", "/scooters","/trips");
 
     @Value("${jwt.token.phrase}")
-    private String tokenPhrase;
+    private String phrase;
 
-    @Value("${jwt.token.issuer:my-comp}")
-    private String tokenIssuer;
+    @Value("${jwt.token.issuer:esserver}")
+    private String issuer;
 
-    @Value("${jwt.token-duration:1200}")
-    private int tokenDuration;
+    @Value("${jwt.token.duration:1200}")
+    private int duration;
 
 
-    public String getTokenPhrase() {
-        return tokenPhrase;
+    public String getPhrase() {
+        return phrase;
     }
 
-    public void setTokenPhrase(String tokenPhrase) {
-        this.tokenPhrase = tokenPhrase;
+    public void setPhrase(String phrase) {
+        this.phrase = phrase;
     }
 
-    public String getTokenIssuer() {
-        return tokenIssuer;
+    public String getIssuer() {
+        return issuer;
     }
 
-    public void setTokenIssuer(String tokenIssuer) {
-        this.tokenIssuer = tokenIssuer;
+    public void setIssuer(String issuer) {
+        this.issuer = issuer;
     }
 
-    public int getTokenDuration() {
-        return tokenDuration;
+    public int getDuration() {
+        return duration;
     }
 
-    public void setTokenDuration(int tokenDuration) {
-        this.tokenDuration = tokenDuration;
+    public void setDuration(int duration) {
+        this.duration = duration;
     }
 
 }

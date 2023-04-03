@@ -41,8 +41,8 @@ public class AuthenticationController {
         user.setName(name);
 
         JWToken jwToken = new JWToken(name, 1000l, "gebruiker");
-        String token = jwToken.encode(apiConfig.getTokenIssuer(), apiConfig.getTokenPhrase(),
-                apiConfig.getTokenDuration());
+        String token = jwToken.encode(apiConfig.getIssuer(), apiConfig.getPhrase(),
+                apiConfig.getDuration());
 
         return ResponseEntity.accepted()
                 .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
