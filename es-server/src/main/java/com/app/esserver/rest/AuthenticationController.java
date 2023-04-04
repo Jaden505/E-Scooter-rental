@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import com.app.esserver.models.Scooter;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
+@CrossOrigin(allowCredentials = "true", origins = {"http://localhost:8080", "http://localhost:8085"})
 public class AuthenticationController {
 
     @Autowired

@@ -2,7 +2,7 @@
     <div id="holder">
         <h1 style="    display: inline-block;">E-scooters Amsterdam</h1>
         <br>
-        <h3>Welcome {{this.sessionService}}</h3>
+        <h3>Welcome {{user_name}}</h3>
         <h3 id="day" ref="day">Today is </h3>
         <h3 id="sub-header">The easiest way to explore Amsterdam!</h3>
 
@@ -19,6 +19,12 @@ export default {
         this.displayDay();
     },
     inject: ["sessionService"],
+
+    computed: {
+        user_name() {
+            return this.sessionService.getCurrentUserName();
+        }
+    },
 
     methods: {
         displayDay() {

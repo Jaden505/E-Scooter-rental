@@ -5,7 +5,7 @@
 </template>
 <script>
 
-import NavBar from "@/components/NavBar";
+import NavBar from "@/components/NavBarSb";
 import HeaderComp from "@/components/HeaderSb";
 import Scooter from "@/models/scooter";
 import {ScooterAdaptor} from "@/services/ScooterAdaptor";
@@ -22,7 +22,7 @@ export default {
     },
     provide() {
         this.theSessionService = shallowReactive(
-            new SessionSbService(BACKEND_URL + "/authentication/", "Login_token"));
+            new SessionSbService(BACKEND_URL + "/authentication/", "JWT-token"));
 
         return {
             scooterService: new ScooterAdaptor(BACKEND_URL + "/scooters/", Scooter.copyConstructer()),
