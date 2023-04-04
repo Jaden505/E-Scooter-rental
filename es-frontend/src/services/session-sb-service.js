@@ -9,7 +9,7 @@ export class SessionSbService {
         this.BROWSER_STORAGE_ITEM_NAME = browserStorageItemName;
         this.RESOURCES_URL = resourcesUrl;
 
-        this.getToken()
+        this.getToken();
     }
 
     getCurrentUserToken() {
@@ -39,12 +39,18 @@ export class SessionSbService {
         });
 
         if (response.ok) {
-            let user = await response.json();
+            let user = response.json();
             this.saveToken(response.headers.get('Authorization'),
                 user);
+
+            window.location.reload();
+
             return user;
         }
         else {
+            this.current_user_token = null;
+            this.current_user = null;
+
             console.log(response);
             return "Invalid credentials"
         }
@@ -67,12 +73,13 @@ export class SessionSbService {
     getToken() {
         if (this.current_user_token != null) return this.current_user_token;
 
-        const namedTokenStr = window.sessionStorage.getItem(this.BROWSER_STORAGE_ITEM_NAME) || window.localStorage.getItem(this.BROWSER_STORAGE_ITEM_NAME);
+        const namedTokenStr = window.sessionStorage.getItem(this.BROWSER_STORAGE_ITEM_NAME) ||
+            window.localStorage.getItem(this.BROWSER_STORAGE_ITEM_NAME);
 
         if (namedTokenStr != null) {
             const namedToken = JSON.parse(namedTokenStr);
             this.current_user_token = namedToken.token;
-            this.current_user_token = namedToken.user;
+            this.current_user = namedToken.user;
         }
 
         return this.current_user_token;
@@ -81,5 +88,10 @@ export class SessionSbService {
 
     signOut() {
         this.saveToken(null, null);
+        window.location.reload();
+    }
+
+    isAuthenticated() {
+        return this.getToken() != null;
     }
 }

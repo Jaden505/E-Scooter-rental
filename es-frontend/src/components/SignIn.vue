@@ -14,6 +14,7 @@
             <div class="error-message" v-if="errorMessage">{{errorMessage}}</div>
         </form>
     </div>
+    <p>{{getBearerToken}}</p>
 </template>
 
 <script>
@@ -22,11 +23,18 @@ export default {
 
     inject: ["sessionService"],
 
+    computed: {
+        getBearerToken() {
+            return this.sessionService.getToken();
+        },
+    },
+
     data() {
         return {
             email: "",
             password: "",
             errorMessage: "",
+            bearer_token: "",
         };
     },
 
@@ -34,7 +42,7 @@ export default {
         async login() {
             const user = await this.sessionService.asyncSignIn(this.email, this.password);
             if (user &&  user.name){
-                this.$router.push("/home");
+                this.$router.push("/");
             }
             else {
                 this.errorMessage = "Incorrect credentials, use and email from @hva.nl"

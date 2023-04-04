@@ -46,10 +46,16 @@ public class AuthenticationController {
         String token = jwToken.encode(apiConfig.getIssuer(), apiConfig.getPhrase(),
                 apiConfig.getDuration());
 
-        return ResponseEntity.accepted()
-                .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
-                .body(user);
+        HttpHeaders headers = new HttpHeaders();
+        headers.set(HttpHeaders.AUTHORIZATION, "Bearer " + token);
 
+        // Set the Access-Control-Expose-Headers header
+        headers.set("Access-Control-Expose-Headers", "Authorization");
+
+
+        return ResponseEntity.accepted()
+                .headers(headers)
+                .body(user);
     }
 }
 

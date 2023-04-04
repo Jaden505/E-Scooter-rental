@@ -31,7 +31,7 @@
 
         <a>MY TRIPS</a>
         <a>MY ACCOUNT</a>
-        <div className="rightnav">
+        <div className="rightnav" v-if="!isAuthenticated">
             <a>
                 <router-link to="/sign-up">SIGN UP</router-link>
             </a>
@@ -39,11 +39,32 @@
                 <router-link to="/sign-in">LOG IN</router-link>
             </a>
         </div>
+        <div className="rightnav" v-else>
+            <a>
+                <span @click="this.sessionService.signOut();">LOG OUT</span>
+            </a>
+        </div>
     </div>
 </template>
 <script>
 export default {
-    name: "NavBar SB"
+    name: "NavBar SB",
+
+    inject: ["sessionService"],
+
+    data() {
+        return {
+            isAuthenticated: false,
+        };
+    },
+
+    created() {
+        this.isAuthenticated = this.sessionService.isAuthenticated();
+    },
+
+    updated() {
+        this.isAuthenticated = this.sessionService.isAuthenticated();
+    },
 }
 </script>
 
