@@ -7,7 +7,7 @@
         <div class="dropdown-content">
           <a><router-link to="/scooters/overview31">All scooters</router-link></a>
           <a><router-link to="/scooters/overview32">Scooters edit (comp)</router-link></a>
-          <a><router-link to="/scooters/overview33">Scooters edit (router)</router-link></a>
+          <a><router-link to="/scooters/overview33">Scooters edit (router)</router-link></a>in
           <a><router-link to="/scooters/overview34">Scooters edit (managed)</router-link></a>
           <a><router-link to="/scooters/overview34">Scooters edit (guarded)</router-link></a>
           <a><router-link to="/scooters/overview37">Scooters edit (REST-backend)</router-link></a>
