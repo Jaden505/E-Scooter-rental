@@ -24,7 +24,8 @@ export default {
     provide() {
         this.theSessionService = shallowReactive(
             new SessionSbService(BACKEND_URL + "/authentication/", "JWT-token"));
-      this.theSessionService = new FetchInterceptor(this.theSessionService, this.$router)
+
+      this.theFetchInterceptor = new FetchInterceptor(this.theSessionService, this.$router)
         return {
             scooterService: new ScooterAdaptor(BACKEND_URL + "/scooters/", Scooter.copyConstructer()),
             sessionService: this.theSessionService

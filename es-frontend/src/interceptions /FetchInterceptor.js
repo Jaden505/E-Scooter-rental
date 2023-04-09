@@ -36,18 +36,34 @@ export class FetchInterceptor {
         return response;
     }
 
+    // static async handleErrorInResponse(response) {
+    //     console.error(`FetchInterceptor response with error: ${response.status} - ${response.statusText}`);
+    //     console.log(`FetchInterceptor current token: ${FetchInterceptor.getToken()}`);
+    //     if (response.status == 401) {
+    //         console.warn(`Authentication error for request: ${response.url}`);
+    //         FetchInterceptor.router.push("/login");
+    //     } else if (response.status != 406) {
+    //         let errorMessage = `Request = ${response.request.method} ${response.request.url}`
+    //             + `<br>Response status code = ${response.status}`
+    //             + `<br>Response error text = ${response.errorText}`
+    //         console.error(`Error message: ${errorMessage}`);
+    //         FetchInterceptor.router.push({ name: 'ERROR', params: { message: errorMessage}});
+    //     }
+    // }
+
+
     static async handleErrorInResponse(response) {
-        console.error(`FetchInterceptor response with error: ${response.status} - ${response.statusText}`);
-        console.log(`FetchInterceptor current token: ${FetchInterceptor.getToken()}`);
+        console.log("FetchInterceptor response with error: ", response);
+        console.log("FetchInterceptor current token: ", FetchInterceptor.getToken())
         if (response.status == 401) {
-            console.warn(`Authentication error for request: ${response.url}`);
-            FetchInterceptor.router.push("/login");
+            console.log("Authentication error")
+            FetchInterceptor.router.push("/login");   // vue-router
         } else if (response.status != 406) {
             let errorMessage = `Request = ${response.request.method} ${response.request.url}`
                 + `<br>Response status code = ${response.status}`
                 + `<br>Response error text = ${response.errorText}`
-            console.error(`Error message: ${errorMessage}`);
-            FetchInterceptor.router.push({ name: 'ERROR', params: { message: errorMessage}});
+            console.log("error")
+            FetchInterceptor.router.push({ name: 'ERROR', params: { message: errorMessage}});  // vue-router
         }
     }
 }
