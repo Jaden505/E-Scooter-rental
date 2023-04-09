@@ -1,5 +1,7 @@
 import fetchIntercept from 'fetch-intercept';
 
+
+
 export class FetchInterceptor {
     unregister;
     static getToken;
@@ -19,12 +21,10 @@ export class FetchInterceptor {
             return [url, { headers: { Authorization: token }}]
         } else {
             let newOptions = { ...options };
-            // TODO combine existing headers with new Authorization header
             newOptions.headers = {
                 ...options.headers,
                 Authorization: token,
             }
-            // console.log("FetchInterceptor request: ", url, newOptions);
             return [url, newOptions];
         }
     }
@@ -36,19 +36,18 @@ export class FetchInterceptor {
         return response;
     }
 
-
     static async handleErrorInResponse(response) {
-        console.log("FetchInterceptor response with error: ", response);
-        console.log("FetchInterceptor current token: ", FetchInterceptor.getToken())
+        console.error(`FetchInterceptor response with error: ${response.status} - ${response.statusText}`);
+        console.log(`FetchInterceptor current token: ${FetchInterceptor.getToken()}`);
         if (response.status == 401) {
-            console.log("Authentication error")
-            FetchInterceptor.router.push("/login");   // vue-router
+            console.warn(`Authentication error for request: ${response.url}`);
+            FetchInterceptor.router.push("/login");
         } else if (response.status != 406) {
             let errorMessage = `Request = ${response.request.method} ${response.request.url}`
                 + `<br>Response status code = ${response.status}`
                 + `<br>Response error text = ${response.errorText}`
-            console.log("error")
-            FetchInterceptor.router.push({ name: 'ERROR', params: { message: errorMessage}});  // vue-router
+            console.error(`Error message: ${errorMessage}`);
+            FetchInterceptor.router.push({ name: 'ERROR', params: { message: errorMessage}});
         }
     }
 }
