@@ -1,7 +1,6 @@
 import fetchIntercept from 'fetch-intercept';
 
 
-
 export class FetchInterceptor {
     unregister;
     static getToken;
@@ -9,7 +8,7 @@ export class FetchInterceptor {
 
     constructor(session, router) {
         this.unregister = fetchIntercept.register(this);
-        FetchInterceptor.getToken = () => session.getCurrentToken();
+        FetchInterceptor.getToken = () => session.getCurrentUserToken();
         FetchInterceptor.router = router;
     }
 
@@ -50,5 +49,5 @@ export class FetchInterceptor {
             FetchInterceptor.router.push({ name: 'ERROR', params: { message: errorMessage}});
         }
     }
-    
+
 }
