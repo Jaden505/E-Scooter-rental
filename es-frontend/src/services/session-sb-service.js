@@ -39,11 +39,10 @@ export class SessionSbService {
         });
 
         if (response.ok) {
-            let user = response.json();
+            let user = await response.json();
+
             this.saveToken(response.headers.get('Authorization'),
                 user);
-
-            window.location.reload();
 
             return user;
         }
