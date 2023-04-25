@@ -30,7 +30,8 @@ export class ScooterAdaptor{
         if (scooter == null)
             scooterReturned = await this.fetchJson(this.resourcesUrl, {method: 'POST'});
         else
-        scooterReturned = await this.fetchJson(this.resourcesUrl, {method: 'PUT', body: scooter, headers: {'Content-type': 'application/json; charset=UTF-8'}});
+        scooterReturned = await this.fetchJson(this.resourcesUrl, {method: 'PUT',
+            body: JSON.stringify(scooter), headers: {'Content-type': 'application/json'}});
 
         return Scooter.copyConstructer(scooterReturned)
     }

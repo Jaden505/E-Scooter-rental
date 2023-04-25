@@ -98,10 +98,11 @@ export default {
         this.onReset()
       }
       await this.$router.push({path : "/scooters/overview37"});
-      location.reload();
+      // location.reload();
     },
 
     async onSave(){
+        console.log(this.scooter)
       await this.scooterService.asyncSave(this.scooter);
       this.saved = true;
 

@@ -43,8 +43,8 @@ export class FetchInterceptor {
             FetchInterceptor.router.push("/login");
         } else if (response.status != 406) {
             let errorMessage = `Request = ${response.request.method} ${response.request.url}`
-                + `<br>Response status code = ${response.status}`
-                + `<br>Response error text = ${response.errorText}`
+                + `Response status code = ${response.status}`
+                + `Response error text = ${response.errorText}`
             console.error(`Error message: ${errorMessage}`);
             FetchInterceptor.router.push({ name: 'ERROR', params: { message: errorMessage}});
         }
